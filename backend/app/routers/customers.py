@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas import CustomerPage, CustomerProfile, CustomerSummary, UploadResult
 from app.services import customers as customer_service
+from app.services.prediction import score_customers
 from app.services.validation import validate_csv_bytes
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
@@ -19,7 +20,7 @@ async def upload_customers(file: UploadFile = File(...), db: Session = Depends(g
     if not result.is_valid:
         raise HTTPException(400, detail={"errors": result.errors})
 
-    inserted, updated = customer_service.upsert_customers(db, result.data)
+    inserted, updated = customer_service.upsert_customers(db, score_customers(result.data))
     return UploadResult(
         inserted=inserted, updated=updated, total_customers=customer_service.count_customers(db)
     )
@@ -30,12 +31,13 @@ def list_customers(
     search: str | None = None,
     contract_type: str | None = None,
     internet_service: str | None = None,
+    risk: str | None = None,
     page: int = Query(1, ge=1),
     page_size: int = Query(25, ge=1, le=200),
     db: Session = Depends(get_db),
 ):
     rows, total = customer_service.search_customers(
-        db, search, contract_type, internet_service, page, page_size
+        db, search, contract_type, internet_service, risk, page, page_size
     )
     return CustomerPage(
         items=[CustomerSummary.model_validate(r) for r in rows],

@@ -16,6 +16,8 @@ class CustomerSummary(BaseModel):
     contract_type: str
     monthly_charges: float
     internet_service: str
+    churn_probability: float | None = None
+    risk_category: str | None = None
 
 
 class CustomerProfile(CustomerSummary):
@@ -32,3 +34,8 @@ class CustomerPage(BaseModel):
     total: int
     page: int
     page_size: int
+
+
+class PredictionResult(BaseModel):
+    churn_probability: float
+    risk_category: str

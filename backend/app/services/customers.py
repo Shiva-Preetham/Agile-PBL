@@ -6,9 +6,15 @@ from sqlalchemy.orm import Session
 from app.models import Customer
 from app.services.fields import FEATURE_NAMES, ID_COLUMN
 
+PREDICTION_COLUMNS = ["churn_probability", "risk_category"]
+
 
 def upsert_customers(db: Session, data: pd.DataFrame) -> tuple[int, int]:
-    """Insert new customers and update existing ones. Returns (inserted, updated)."""
+    """Insert new customers and update existing ones. Returns (inserted, updated).
+
+    `data` holds validated features plus, when available, prediction columns.
+    """
+    stored_columns = FEATURE_NAMES + [c for c in PREDICTION_COLUMNS if c in data.columns]
     ids = data[ID_COLUMN].tolist()
     existing = {c.customer_id: c for c in db.scalars(select(Customer).where(Customer.customer_id.in_(ids)))}
 
@@ -21,7 +27,7 @@ def upsert_customers(db: Session, data: pd.DataFrame) -> tuple[int, int]:
             inserted += 1
         else:
             updated += 1
-        for name in FEATURE_NAMES:
+        for name in stored_columns:
             setattr(customer, name, record[name])
     db.commit()
     return inserted, updated
@@ -36,6 +42,7 @@ def search_customers(
     search: str | None = None,
     contract_type: str | None = None,
     internet_service: str | None = None,
+    risk: str | None = None,
     page: int = 1,
     page_size: int = 25,
 ) -> tuple[list[Customer], int]:
@@ -46,10 +53,13 @@ def search_customers(
         query = query.where(Customer.contract_type == contract_type)
     if internet_service:
         query = query.where(Customer.internet_service == internet_service)
+    if risk:
+        query = query.where(Customer.risk_category == risk)
 
     total = db.scalar(select(func.count()).select_from(query.subquery())) or 0
+    highest_risk_first = (Customer.churn_probability.desc().nulls_last(), Customer.customer_id)
     rows = db.scalars(
-        query.order_by(Customer.customer_id).offset((page - 1) * page_size).limit(page_size)
+        query.order_by(*highest_risk_first).offset((page - 1) * page_size).limit(page_size)
     ).all()
     return list(rows), total
 

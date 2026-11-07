@@ -28,5 +28,8 @@ class Customer(Base):
     monthly_usage_gb: Mapped[float] = mapped_column(Float)
     days_since_last_login: Mapped[int] = mapped_column(Integer)
 
+    churn_probability: Mapped[float | None] = mapped_column(Float, index=True)
+    risk_category: Mapped[str | None] = mapped_column(String(10), index=True)
+
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)

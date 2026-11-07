@@ -12,3 +12,8 @@ DATABASE_URL = os.getenv(
 
 # Upload validation: stop listing errors after this many, so messages stay readable.
 MAX_REPORTED_ERRORS = 20
+
+# Trained model artefacts (created by `python -m ml.train`).
+MODEL_DIR = Path(os.getenv("MODEL_DIR", BACKEND_DIR / "models"))
+MODEL_PATH = MODEL_DIR / "churn_model.json"
+METRICS_PATH = MODEL_DIR / "metrics.json"
