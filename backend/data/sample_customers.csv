@@ -1,0 +1,251 @@
+customer_id,tenure_months,contract_type,monthly_charges,total_charges,internet_service,tech_support,payment_method,support_tickets,monthly_usage_gb,days_since_last_login
+CS-10001,1,One year,98.65,101.71,Fiber optic,No,Bank transfer,1,306.3,2
+CS-10002,64,Two year,28.69,1815.6,No,No,Electronic check,0,0.0,2
+CS-10003,38,One year,84.7,3268.35,Fiber optic,No,Mailed check,5,112.6,1
+CS-10004,10,Month-to-month,57.18,571.36,DSL,Yes,Electronic check,1,195.0,1
+CS-10005,7,Month-to-month,93.05,639.93,Fiber optic,Yes,Electronic check,3,48.0,51
+CS-10006,5,Two year,61.79,305.23,DSL,No,Credit card,1,385.9,0
+CS-10007,29,Month-to-month,72.51,2181.04,Fiber optic,No,Mailed check,2,4.7,4
+CS-10008,30,Two year,94.83,2808.82,Fiber optic,No,Bank transfer,4,106.1,59
+CS-10009,28,One year,114.89,3237.17,Fiber optic,No,Bank transfer,2,21.0,5
+CS-10010,24,Month-to-month,70.96,1763.68,Fiber optic,No,Credit card,4,61.0,10
+CS-10011,4,Month-to-month,67.18,264.37,DSL,Yes,Electronic check,5,43.6,26
+CS-10012,18,Month-to-month,91.41,1686.05,Fiber optic,No,Electronic check,4,24.3,4
+CS-10013,5,Month-to-month,86.97,421.42,Fiber optic,Yes,Mailed check,1,43.0,4
+CS-10014,19,Month-to-month,100.66,1948.24,Fiber optic,Yes,Electronic check,0,120.2,0
+CS-10015,21,Month-to-month,77.08,1658.39,Fiber optic,No,Electronic check,3,50.7,2
+CS-10016,27,One year,59.5,1649.87,DSL,Yes,Credit card,1,166.7,0
+CS-10017,55,Two year,101.52,5795.8,Fiber optic,Yes,Bank transfer,1,129.2,8
+CS-10018,17,One year,86.18,1489.78,Fiber optic,No,Mailed check,2,107.8,0
+CS-10019,15,One year,18.14,282.49,No,No,Electronic check,0,0.0,7
+CS-10020,2,Two year,23.06,45.3,No,No,Bank transfer,1,0.0,2
+CS-10021,9,Month-to-month,53.89,485.85,DSL,No,Mailed check,0,204.4,0
+CS-10022,8,Month-to-month,102.3,799.68,Fiber optic,Yes,Electronic check,2,83.7,7
+CS-10023,36,One year,49.61,1726.46,DSL,No,Credit card,0,8.9,10
+CS-10024,25,Month-to-month,96.07,2390.02,Fiber optic,No,Credit card,2,165.8,0
+CS-10025,31,Month-to-month,76.42,2410.65,Fiber optic,No,Credit card,1,18.7,2
+CS-10026,10,Month-to-month,64.19,656.2,DSL,Yes,Credit card,2,25.7,13
+CS-10027,17,Month-to-month,87.03,1422.34,Fiber optic,No,Mailed check,4,207.5,0
+CS-10028,9,Two year,64.1,597.31,Fiber optic,No,Electronic check,1,40.4,1
+CS-10029,19,One year,87.94,1637.07,Fiber optic,Yes,Bank transfer,4,27.0,5
+CS-10030,26,Month-to-month,78.13,1997.61,Fiber optic,No,Electronic check,0,116.4,7
+CS-10031,33,Month-to-month,83.89,2841.99,Fiber optic,No,Bank transfer,4,82.0,58
+CS-10032,24,Month-to-month,102.23,2530.9,Fiber optic,No,Electronic check,2,27.3,8
+CS-10033,1,Month-to-month,77.66,79.13,Fiber optic,Yes,Electronic check,4,45.8,3
+CS-10034,10,Month-to-month,48.19,475.45,DSL,No,Bank transfer,0,79.1,3
+CS-10035,41,One year,101.33,4142.18,Fiber optic,No,Mailed check,1,77.0,0
+CS-10036,6,Month-to-month,89.07,548.73,Fiber optic,Yes,Bank transfer,0,86.7,4
+CS-10037,4,Month-to-month,102.26,404.37,Fiber optic,No,Credit card,2,190.6,0
+CS-10038,31,Month-to-month,60.99,1936.87,DSL,Yes,Credit card,3,67.0,6
+CS-10039,68,Two year,79.84,5551.61,Fiber optic,No,Bank transfer,4,41.7,9
+CS-10040,22,Month-to-month,57.39,1259.42,DSL,No,Credit card,1,35.9,4
+CS-10041,4,Month-to-month,99.38,410.13,Fiber optic,Yes,Bank transfer,0,100.8,2
+CS-10042,48,Two year,66.71,3172.5,DSL,No,Credit card,2,28.7,7
+CS-10043,15,Month-to-month,88.01,1346.54,Fiber optic,No,Credit card,2,46.0,1
+CS-10044,12,Two year,22.45,272.41,No,No,Electronic check,2,0.0,2
+CS-10045,17,One year,86.96,1458.36,Fiber optic,No,Electronic check,2,256.5,4
+CS-10046,2,One year,52.65,105.57,DSL,No,Mailed check,0,66.1,23
+CS-10047,23,Month-to-month,105.87,2455.67,Fiber optic,Yes,Electronic check,2,26.4,4
+CS-10048,15,Month-to-month,58.07,873.62,DSL,No,Electronic check,1,77.4,9
+CS-10049,8,Month-to-month,18.0,139.52,No,No,Credit card,2,0.0,0
+CS-10050,57,Two year,53.59,3174.73,DSL,No,Electronic check,2,149.5,1
+CS-10051,22,Month-to-month,94.72,2161.63,Fiber optic,No,Electronic check,4,23.6,0
+CS-10052,4,One year,93.94,361.86,Fiber optic,Yes,Bank transfer,1,215.7,0
+CS-10053,28,Month-to-month,56.73,1644.9,DSL,Yes,Electronic check,0,159.3,6
+CS-10054,5,Month-to-month,51.81,259.7,DSL,No,Electronic check,2,20.8,12
+CS-10055,12,Month-to-month,58.22,677.72,DSL,No,Credit card,1,121.7,1
+CS-10056,22,Month-to-month,72.51,1636.13,Fiber optic,No,Bank transfer,1,75.3,8
+CS-10057,21,Two year,18.0,375.97,No,No,Mailed check,2,0.0,2
+CS-10058,24,Month-to-month,95.39,2328.41,Fiber optic,No,Electronic check,1,7.4,6
+CS-10059,5,Two year,83.57,428.79,Fiber optic,No,Electronic check,1,65.3,4
+CS-10060,10,One year,61.47,616.57,DSL,No,Credit card,1,45.2,3
+CS-10061,19,One year,99.27,1818.18,Fiber optic,Yes,Credit card,3,117.9,23
+CS-10062,33,One year,94.01,3182.36,Fiber optic,No,Electronic check,1,140.8,6
+CS-10063,46,One year,58.19,2718.29,DSL,No,Bank transfer,0,75.1,0
+CS-10064,10,Month-to-month,41.69,430.58,No,No,Mailed check,0,0.0,9
+CS-10065,3,Month-to-month,94.18,277.34,Fiber optic,Yes,Bank transfer,2,101.0,1
+CS-10066,32,Month-to-month,54.72,1790.99,DSL,Yes,Electronic check,2,85.3,15
+CS-10067,8,Month-to-month,64.77,533.63,DSL,Yes,Electronic check,1,77.2,1
+CS-10068,17,Month-to-month,25.77,433.01,No,No,Electronic check,0,0.0,2
+CS-10069,16,Two year,18.0,285.93,No,No,Electronic check,1,0.0,0
+CS-10070,29,Month-to-month,88.68,2537.56,Fiber optic,No,Credit card,2,293.8,1
+CS-10071,5,One year,20.47,98.3,No,No,Credit card,4,0.0,2
+CS-10072,16,Month-to-month,18.0,281.82,No,No,Bank transfer,4,0.0,7
+CS-10073,24,Two year,86.4,2045.65,Fiber optic,Yes,Bank transfer,1,165.6,0
+CS-10074,21,One year,85.38,1736.81,Fiber optic,No,Electronic check,2,73.0,5
+CS-10075,21,Month-to-month,53.94,1156.8,DSL,No,Mailed check,1,54.7,21
+CS-10076,1,Two year,72.78,72.35,Fiber optic,No,Credit card,3,52.6,7
+CS-10077,39,Two year,84.72,3322.11,Fiber optic,No,Credit card,1,89.5,5
+CS-10078,62,Two year,21.63,1317.95,No,No,Mailed check,2,0.0,0
+CS-10079,36,One year,58.94,2098.13,DSL,Yes,Credit card,1,97.8,0
+CS-10080,33,Month-to-month,77.49,2609.01,Fiber optic,No,Credit card,3,93.0,1
+CS-10081,10,Month-to-month,63.85,636.96,DSL,No,Credit card,0,146.3,1
+CS-10082,55,Two year,76.75,4253.85,Fiber optic,Yes,Electronic check,1,440.1,17
+CS-10083,3,One year,85.93,256.2,Fiber optic,Yes,Bank transfer,3,66.5,0
+CS-10084,22,Month-to-month,100.07,2211.59,Fiber optic,No,Mailed check,2,76.6,8
+CS-10085,26,Two year,51.59,1383.98,DSL,Yes,Mailed check,2,114.3,9
+CS-10086,33,One year,83.27,2696.78,Fiber optic,No,Mailed check,3,27.2,1
+CS-10087,27,One year,97.93,2648.14,Fiber optic,Yes,Electronic check,5,67.0,6
+CS-10088,17,Month-to-month,84.45,1457.15,Fiber optic,No,Electronic check,4,11.1,2
+CS-10089,8,Month-to-month,55.25,427.39,DSL,Yes,Bank transfer,2,45.6,2
+CS-10090,10,Month-to-month,90.05,933.78,Fiber optic,No,Bank transfer,2,17.2,0
+CS-10091,24,Month-to-month,97.71,2344.81,Fiber optic,No,Credit card,5,61.9,13
+CS-10092,42,Two year,37.62,1547.85,DSL,No,Electronic check,0,51.5,0
+CS-10093,28,Month-to-month,50.34,1438.89,DSL,No,Electronic check,1,122.4,0
+CS-10094,15,Month-to-month,78.69,1210.15,Fiber optic,Yes,Bank transfer,1,32.8,28
+CS-10095,7,Month-to-month,47.97,339.3,DSL,No,Credit card,1,35.7,8
+CS-10096,2,One year,18.0,37.2,No,No,Mailed check,1,0.0,0
+CS-10097,1,Month-to-month,18.0,17.41,No,No,Electronic check,4,0.0,1
+CS-10098,10,Month-to-month,24.78,248.35,No,No,Bank transfer,1,0.0,0
+CS-10099,4,Month-to-month,18.0,73.4,No,No,Credit card,3,0.0,6
+CS-10100,28,Month-to-month,89.13,2578.86,Fiber optic,No,Credit card,3,196.2,1
+CS-10101,18,Two year,61.7,1123.17,DSL,No,Credit card,0,39.7,11
+CS-10102,5,One year,18.0,90.74,No,No,Mailed check,0,0.0,4
+CS-10103,27,Month-to-month,89.2,2386.86,Fiber optic,Yes,Electronic check,1,79.9,1
+CS-10104,11,Month-to-month,103.1,1140.6,Fiber optic,No,Credit card,0,56.1,15
+CS-10105,36,Two year,90.97,3289.28,Fiber optic,No,Credit card,0,32.8,2
+CS-10106,5,Month-to-month,18.0,92.92,No,No,Credit card,4,0.0,6
+CS-10107,30,One year,57.4,1767.06,DSL,Yes,Mailed check,1,155.1,2
+CS-10108,7,One year,79.56,567.49,Fiber optic,No,Electronic check,2,3.0,2
+CS-10109,6,Month-to-month,90.49,561.35,Fiber optic,No,Electronic check,2,68.5,2
+CS-10110,0,Month-to-month,65.94,63.65,DSL,Yes,Credit card,1,48.2,1
+CS-10111,6,One year,50.46,309.29,DSL,No,Credit card,0,55.2,2
+CS-10112,14,Two year,56.07,782.7,DSL,Yes,Mailed check,1,198.6,7
+CS-10113,3,Month-to-month,98.24,300.66,Fiber optic,No,Credit card,0,45.3,0
+CS-10114,52,Two year,83.42,4267.11,Fiber optic,No,Mailed check,4,22.3,10
+CS-10115,8,Month-to-month,89.73,715.96,Fiber optic,No,Mailed check,2,81.2,6
+CS-10116,17,One year,18.0,313.95,No,No,Bank transfer,0,0.0,8
+CS-10117,12,Two year,80.47,929.73,Fiber optic,Yes,Electronic check,3,12.7,2
+CS-10118,3,Month-to-month,83.29,245.69,Fiber optic,Yes,Electronic check,2,64.5,1
+CS-10119,14,Month-to-month,41.59,581.72,No,No,Electronic check,0,0.0,8
+CS-10120,29,Two year,54.32,1619.58,DSL,No,Electronic check,1,93.6,9
+CS-10121,0,Month-to-month,83.23,81.7,Fiber optic,No,Mailed check,0,315.4,14
+CS-10122,48,One year,52.93,2606.31,DSL,Yes,Electronic check,2,74.9,8
+CS-10123,26,One year,86.51,2203.29,Fiber optic,No,Credit card,4,47.7,1
+CS-10124,19,Month-to-month,27.9,521.75,No,No,Electronic check,1,0.0,1
+CS-10125,50,One year,59.71,2998.35,DSL,No,Mailed check,0,3.3,3
+CS-10126,22,Month-to-month,106.52,2372.29,Fiber optic,No,Bank transfer,2,106.9,0
+CS-10127,7,Month-to-month,23.92,172.53,No,No,Electronic check,2,0.0,27
+CS-10128,6,Month-to-month,101.03,624.58,Fiber optic,No,Mailed check,3,66.6,18
+CS-10129,4,Month-to-month,90.49,354.73,Fiber optic,No,Bank transfer,2,49.1,0
+CS-10130,20,Month-to-month,93.45,1905.72,Fiber optic,No,Bank transfer,5,226.6,2
+CS-10131,19,Two year,75.01,1440.58,Fiber optic,No,Credit card,3,53.2,0
+CS-10132,10,One year,86.86,860.69,Fiber optic,No,Credit card,1,179.7,2
+CS-10133,18,Month-to-month,57.38,1055.65,DSL,No,Electronic check,0,73.3,0
+CS-10134,5,Month-to-month,55.81,287.92,DSL,Yes,Credit card,1,58.0,1
+CS-10135,17,Two year,38.62,655.45,DSL,No,Bank transfer,1,105.7,5
+CS-10136,12,Month-to-month,29.93,371.12,No,No,Bank transfer,1,0.0,2
+CS-10137,42,Two year,54.52,2221.62,DSL,Yes,Electronic check,0,82.0,2
+CS-10138,2,Month-to-month,54.06,105.23,DSL,No,Mailed check,0,100.9,7
+CS-10139,2,Month-to-month,19.7,40.23,No,No,Bank transfer,1,0.0,5
+CS-10140,1,Two year,55.95,55.08,DSL,Yes,Credit card,0,158.0,0
+CS-10141,18,One year,25.66,465.03,No,No,Credit card,3,0.0,0
+CS-10142,5,One year,18.0,89.98,No,No,Electronic check,1,0.0,12
+CS-10143,5,Month-to-month,79.62,386.82,Fiber optic,Yes,Credit card,3,468.8,0
+CS-10144,24,Two year,90.62,2219.11,Fiber optic,Yes,Bank transfer,4,61.0,1
+CS-10145,32,Month-to-month,59.31,1934.58,DSL,Yes,Bank transfer,3,46.8,8
+CS-10146,43,Two year,54.61,2281.58,DSL,Yes,Credit card,2,48.0,1
+CS-10147,29,Month-to-month,52.83,1502.63,DSL,No,Mailed check,1,47.5,6
+CS-10148,17,Month-to-month,50.49,878.97,DSL,Yes,Credit card,1,22.8,6
+CS-10149,23,Month-to-month,87.47,2078.16,Fiber optic,No,Credit card,3,32.1,24
+CS-10150,42,Two year,32.63,1411.04,No,No,Credit card,1,0.0,9
+CS-10151,34,Month-to-month,78.48,2668.72,Fiber optic,Yes,Mailed check,4,43.1,31
+CS-10152,13,Two year,35.71,459.31,No,No,Mailed check,0,0.0,4
+CS-10153,24,One year,95.6,2284.35,Fiber optic,No,Electronic check,2,63.6,3
+CS-10154,32,One year,53.92,1680.77,DSL,No,Bank transfer,0,112.6,3
+CS-10155,6,One year,95.05,570.12,Fiber optic,No,Credit card,1,31.1,3
+CS-10156,22,Two year,44.81,964.6,DSL,Yes,Electronic check,0,54.3,0
+CS-10157,12,Month-to-month,42.42,495.27,DSL,No,Bank transfer,2,90.0,0
+CS-10158,3,Month-to-month,18.0,53.48,No,No,Bank transfer,2,0.0,0
+CS-10159,8,Month-to-month,54.31,419.32,DSL,Yes,Electronic check,1,84.1,2
+CS-10160,24,Month-to-month,55.07,1318.55,DSL,No,Credit card,1,10.5,8
+CS-10161,27,Month-to-month,53.36,1463.33,DSL,No,Mailed check,0,242.2,0
+CS-10162,23,Two year,88.89,2069.23,Fiber optic,No,Electronic check,3,83.0,2
+CS-10163,32,Two year,68.78,2284.64,Fiber optic,No,Electronic check,4,52.9,0
+CS-10164,4,Month-to-month,62.46,257.55,DSL,Yes,Credit card,0,45.0,0
+CS-10165,14,One year,75.23,1064.49,Fiber optic,No,Electronic check,3,124.8,6
+CS-10166,5,Month-to-month,52.05,268.53,DSL,No,Mailed check,0,281.6,0
+CS-10167,26,One year,84.28,2181.54,Fiber optic,No,Electronic check,3,77.1,3
+CS-10168,6,One year,77.59,476.67,Fiber optic,Yes,Bank transfer,5,64.0,1
+CS-10169,5,Month-to-month,75.66,371.78,Fiber optic,No,Mailed check,4,35.3,11
+CS-10170,46,Two year,78.95,3639.46,Fiber optic,No,Credit card,0,77.3,12
+CS-10171,17,Month-to-month,87.89,1551.49,Fiber optic,No,Bank transfer,2,119.1,8
+CS-10172,29,One year,27.31,798.25,No,No,Bank transfer,1,0.0,5
+CS-10173,14,One year,93.08,1303.83,Fiber optic,Yes,Electronic check,3,95.2,1
+CS-10174,24,Month-to-month,49.05,1204.26,DSL,Yes,Electronic check,1,177.1,0
+CS-10175,23,Month-to-month,80.88,1832.32,Fiber optic,Yes,Credit card,2,56.1,0
+CS-10176,17,Month-to-month,49.71,867.45,DSL,Yes,Credit card,2,66.8,6
+CS-10177,38,One year,62.05,2267.08,DSL,No,Bank transfer,1,29.0,11
+CS-10178,18,Two year,39.66,698.93,DSL,Yes,Credit card,0,28.6,2
+CS-10179,8,One year,69.15,538.92,DSL,No,Bank transfer,2,9.4,19
+CS-10180,13,Month-to-month,18.0,229.46,No,No,Bank transfer,2,0.0,11
+CS-10181,20,Two year,80.95,1676.71,Fiber optic,No,Mailed check,4,67.5,0
+CS-10182,23,Two year,25.06,554.43,No,No,Mailed check,2,0.0,6
+CS-10183,14,Two year,97.29,1340.13,Fiber optic,Yes,Mailed check,0,61.1,10
+CS-10184,4,Month-to-month,61.08,245.77,DSL,No,Electronic check,1,155.5,10
+CS-10185,61,Two year,97.47,6042.27,Fiber optic,No,Mailed check,3,114.8,1
+CS-10186,17,Month-to-month,89.21,1549.79,Fiber optic,No,Mailed check,1,4.9,2
+CS-10187,11,Month-to-month,69.07,752.68,DSL,No,Electronic check,1,94.4,2
+CS-10188,8,Month-to-month,99.21,775.91,Fiber optic,No,Mailed check,1,79.9,13
+CS-10189,5,Month-to-month,87.1,447.78,Fiber optic,No,Electronic check,1,158.1,0
+CS-10190,11,Month-to-month,70.95,756.85,DSL,No,Bank transfer,1,227.0,1
+CS-10191,3,Month-to-month,59.48,172.23,DSL,No,Credit card,1,45.3,8
+CS-10192,29,One year,88.78,2519.33,Fiber optic,Yes,Bank transfer,2,179.8,6
+CS-10193,5,Month-to-month,79.71,398.31,Fiber optic,No,Bank transfer,5,6.4,0
+CS-10194,54,One year,85.4,4774.72,Fiber optic,No,Bank transfer,3,246.5,0
+CS-10195,28,Month-to-month,95.0,2708.7,Fiber optic,No,Electronic check,2,35.6,3
+CS-10196,0,One year,46.19,46.43,DSL,Yes,Mailed check,4,21.5,1
+CS-10197,5,Month-to-month,63.85,319.79,DSL,No,Credit card,1,88.8,6
+CS-10198,3,Month-to-month,61.14,186.26,DSL,Yes,Credit card,1,45.7,2
+CS-10199,51,Two year,60.5,3116.72,DSL,No,Electronic check,2,58.2,1
+CS-10200,0,Month-to-month,68.14,67.25,Fiber optic,Yes,Electronic check,5,50.8,11
+CS-10201,66,Two year,21.07,1345.31,No,No,Credit card,1,0.0,0
+CS-10202,50,One year,93.83,4579.25,Fiber optic,No,Credit card,0,53.9,1
+CS-10203,16,One year,51.13,836.58,DSL,Yes,Bank transfer,3,10.9,3
+CS-10204,18,Month-to-month,58.81,1069.97,DSL,No,Credit card,2,234.0,1
+CS-10205,36,One year,18.0,663.41,No,No,Bank transfer,2,0.0,29
+CS-10206,30,Month-to-month,28.04,810.55,No,No,Credit card,6,0.0,22
+CS-10207,7,Two year,82.04,592.69,Fiber optic,Yes,Electronic check,4,55.5,8
+CS-10208,14,Two year,65.84,913.08,DSL,Yes,Mailed check,0,28.3,9
+CS-10209,19,Two year,71.41,1403.05,Fiber optic,No,Bank transfer,4,36.6,0
+CS-10210,9,Month-to-month,94.23,854.48,Fiber optic,No,Electronic check,1,21.4,7
+CS-10211,18,Month-to-month,19.87,359.01,No,No,Bank transfer,0,0.0,0
+CS-10212,11,Month-to-month,65.27,736.24,DSL,No,Electronic check,1,52.1,0
+CS-10213,11,Month-to-month,49.67,551.85,DSL,Yes,Bank transfer,1,329.9,11
+CS-10214,20,One year,52.43,1063.24,DSL,No,Credit card,2,33.6,0
+CS-10215,11,One year,78.18,836.42,DSL,No,Mailed check,1,123.2,4
+CS-10216,26,Month-to-month,18.0,471.91,No,No,Credit card,3,0.0,1
+CS-10217,42,Two year,81.65,3389.93,Fiber optic,No,Bank transfer,4,23.7,55
+CS-10218,48,One year,19.51,904.68,No,No,Bank transfer,1,0.0,6
+CS-10219,28,Month-to-month,48.8,1326.3,DSL,Yes,Electronic check,0,86.0,0
+CS-10220,7,One year,98.71,689.85,Fiber optic,No,Electronic check,2,122.0,10
+CS-10221,13,Two year,103.53,1320.32,Fiber optic,No,Bank transfer,2,265.6,1
+CS-10222,29,Month-to-month,81.66,2418.41,Fiber optic,Yes,Credit card,5,44.3,9
+CS-10223,8,One year,42.47,329.5,DSL,Yes,Bank transfer,2,61.6,0
+CS-10224,12,One year,98.55,1136.6,Fiber optic,No,Credit card,4,248.7,3
+CS-10225,37,One year,97.98,3769.39,Fiber optic,Yes,Electronic check,2,39.1,7
+CS-10226,0,Month-to-month,95.39,93.96,Fiber optic,No,Credit card,4,128.0,0
+CS-10227,10,One year,98.41,984.87,Fiber optic,Yes,Credit card,4,302.5,0
+CS-10228,8,One year,50.19,392.21,DSL,No,Bank transfer,1,60.8,4
+CS-10229,30,Two year,20.48,600.09,No,No,Mailed check,0,0.0,0
+CS-10230,48,Two year,75.54,3597.58,Fiber optic,No,Bank transfer,4,93.9,40
+CS-10231,19,Month-to-month,75.24,1462.7,Fiber optic,Yes,Electronic check,2,14.3,23
+CS-10232,24,One year,96.83,2238.21,Fiber optic,No,Bank transfer,2,18.8,22
+CS-10233,5,Two year,51.95,266.76,DSL,No,Bank transfer,0,163.1,6
+CS-10234,41,Two year,78.52,3345.59,DSL,Yes,Mailed check,2,82.2,16
+CS-10235,4,Month-to-month,58.67,235.79,DSL,No,Electronic check,2,66.0,20
+CS-10236,7,Month-to-month,52.24,361.58,DSL,No,Electronic check,1,287.0,3
+CS-10237,56,One year,65.18,3572.39,DSL,Yes,Electronic check,1,149.6,1
+CS-10238,29,Month-to-month,104.21,2945.44,Fiber optic,No,Credit card,1,45.0,4
+CS-10239,15,One year,62.38,922.48,DSL,Yes,Electronic check,1,120.4,3
+CS-10240,37,Two year,77.05,2931.05,Fiber optic,No,Electronic check,1,180.8,1
+CS-10241,15,Month-to-month,25.34,364.99,No,No,Electronic check,2,0.0,1
+CS-10242,4,Month-to-month,70.38,287.96,DSL,No,Mailed check,1,32.0,3
+CS-10243,9,Month-to-month,53.56,488.5,DSL,Yes,Bank transfer,0,81.8,14
+CS-10244,13,One year,18.0,225.0,No,No,Credit card,1,0.0,8
+CS-10245,2,Month-to-month,97.15,187.61,Fiber optic,Yes,Credit card,2,24.4,58
+CS-10246,2,Month-to-month,89.26,181.88,Fiber optic,No,Credit card,2,35.5,12
+CS-10247,28,Month-to-month,48.08,1364.89,DSL,No,Credit card,0,167.9,2
+CS-10248,30,One year,84.58,2499.54,Fiber optic,Yes,Mailed check,2,71.7,6
+CS-10249,48,Two year,51.2,2528.63,DSL,Yes,Electronic check,3,105.8,0
+CS-10250,7,Month-to-month,24.67,168.69,No,No,Credit card,2,0.0,3

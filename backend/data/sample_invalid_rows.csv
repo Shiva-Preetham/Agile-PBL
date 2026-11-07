@@ -1,0 +1,7 @@
+customer_id,tenure_months,contract_type,monthly_charges,total_charges,internet_service,tech_support,payment_method,support_tickets,monthly_usage_gb,days_since_last_login
+BAD-1,12,Month-to-month,70.5,846.0,DSL,Yes,Credit card,1,90.2,4
+BAD-2,abc,One year,55.0,600.0,DSL,No,Mailed check,0,40.0,2
+BAD-3,8,Weekly,80.0,640.0,Fiber optic,No,Electronic check,3,120.0,10
+BAD-4,30,Two year,-20,900.0,No,No,Bank transfer,0,0.0,1
+BAD-1,5,Month-to-month,99.0,495.0,Fiber optic,No,Electronic check,4,10.0,30
+BAD-6,40,One year,,2400.0,DSL,Yes,Credit card,0,150.0,2

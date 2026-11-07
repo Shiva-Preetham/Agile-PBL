@@ -1,0 +1,32 @@
+"""Database tables."""
+from datetime import datetime, timezone
+
+from sqlalchemy import DateTime, Float, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.database import Base
+
+
+def _now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+class Customer(Base):
+    __tablename__ = "customers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    customer_id: Mapped[str] = mapped_column(String(50), unique=True, index=True)
+
+    tenure_months: Mapped[int] = mapped_column(Integer)
+    contract_type: Mapped[str] = mapped_column(String(20), index=True)
+    monthly_charges: Mapped[float] = mapped_column(Float)
+    total_charges: Mapped[float] = mapped_column(Float)
+    internet_service: Mapped[str] = mapped_column(String(20))
+    tech_support: Mapped[str] = mapped_column(String(5))
+    payment_method: Mapped[str] = mapped_column(String(30))
+    support_tickets: Mapped[int] = mapped_column(Integer)
+    monthly_usage_gb: Mapped[float] = mapped_column(Float)
+    days_since_last_login: Mapped[int] = mapped_column(Integer)
+
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)
