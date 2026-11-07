@@ -1,4 +1,6 @@
 """API response models (what the frontend receives)."""
+from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -6,6 +8,15 @@ class UploadResult(BaseModel):
     inserted: int
     updated: int
     total_customers: int
+
+
+class ActionOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    rule_id: str
+    action: str
+    status: str
+    updated_at: datetime | None = None
 
 
 class CustomerSummary(BaseModel):
@@ -27,6 +38,7 @@ class CustomerProfile(CustomerSummary):
     support_tickets: int
     monthly_usage_gb: float
     days_since_last_login: int
+    action: ActionOut | None = None
 
 
 class CustomerPage(BaseModel):
@@ -39,3 +51,36 @@ class CustomerPage(BaseModel):
 class PredictionResult(BaseModel):
     churn_probability: float
     risk_category: str
+
+
+class FactorOut(BaseModel):
+    feature: str
+    label: str
+    value: str | int | float
+    contribution: float
+    effect: str
+
+
+class ExplanationOut(BaseModel):
+    customer_id: str
+    churn_probability: float
+    risk_category: str
+    base_value: float
+    factors: list[FactorOut]
+    note: str = (
+        "Contributions are SHAP values in log-odds. Positive values push the customer "
+        "towards churn; negative values keep them."
+    )
+
+
+class RecommendationOut(BaseModel):
+    customer_id: str
+    risk_category: str
+    rule_id: str
+    action: str
+    reason: str
+    requires_human_review: bool
+
+
+class StatusUpdate(BaseModel):
+    status: str

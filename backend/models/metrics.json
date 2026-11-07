@@ -45,5 +45,57 @@
     "roc_auc": 0.9159
   },
   "training_metrics_note": "Training-set scores are for overfitting checks only and are NOT holdout results.",
-  "trained_at": "2026-11-07T09:58:15+00:00"
+  "global_importance": [
+    {
+      "feature": "contract_type",
+      "label": "Contract type",
+      "mean_abs_shap": 0.7134
+    },
+    {
+      "feature": "monthly_charges",
+      "label": "Monthly charges",
+      "mean_abs_shap": 0.6558
+    },
+    {
+      "feature": "tenure_months",
+      "label": "Tenure (months)",
+      "mean_abs_shap": 0.4981
+    },
+    {
+      "feature": "support_tickets",
+      "label": "Support tickets",
+      "mean_abs_shap": 0.3454
+    },
+    {
+      "feature": "tech_support",
+      "label": "Tech support",
+      "mean_abs_shap": 0.3238
+    },
+    {
+      "feature": "days_since_last_login",
+      "label": "Days since last login",
+      "mean_abs_shap": 0.3007
+    },
+    {
+      "feature": "monthly_usage_gb",
+      "label": "Monthly usage (GB)",
+      "mean_abs_shap": 0.2681
+    },
+    {
+      "feature": "payment_method",
+      "label": "Payment method",
+      "mean_abs_shap": 0.252
+    },
+    {
+      "feature": "internet_service",
+      "label": "Internet service",
+      "mean_abs_shap": 0.1795
+    },
+    {
+      "feature": "total_charges",
+      "label": "Total charges",
+      "mean_abs_shap": 0.1181
+    }
+  ],
+  "trained_at": "2026-11-07T10:03:03+00:00"
 }

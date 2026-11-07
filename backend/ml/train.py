@@ -10,7 +10,9 @@ Outputs:
 import json
 from datetime import datetime, timezone
 
+import numpy as np
 import pandas as pd
+import shap
 from sklearn.metrics import (
     accuracy_score,
     confusion_matrix,
@@ -23,7 +25,9 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 
 from app.config import BACKEND_DIR, METRICS_PATH, MODEL_DIR, MODEL_PATH
+from app.services.explain import group_by_field
 from app.services.features import build_feature_matrix
+from app.services.fields import FEATURE_NAMES, FIELD_LABELS
 from app.services.validation import validate_dataframe
 
 DATA_PATH = BACKEND_DIR / "data" / "training_customers.csv"
@@ -63,6 +67,17 @@ def evaluate(model, features, labels) -> dict:
     }
 
 
+def global_importance(model, features) -> list[dict]:
+    """Mean |SHAP| per customer field on the holdout set: which fields matter most overall."""
+    shap_values = np.asarray(shap.TreeExplainer(model).shap_values(features))
+    mean_impact = np.abs(group_by_field(shap_values)).mean(axis=0)
+    ranking = sorted(zip(FEATURE_NAMES, mean_impact), key=lambda item: item[1], reverse=True)
+    return [
+        {"feature": name, "label": FIELD_LABELS[name], "mean_abs_shap": round(float(value), 4)}
+        for name, value in ranking
+    ]
+
+
 def train() -> dict:
     features, labels = load_training_data()
     x_train, x_test, y_train, y_test = train_test_split(
@@ -96,6 +111,7 @@ def train() -> dict:
         "holdout_confusion_matrix": {"tn": int(tn), "fp": int(fp), "fn": int(fn), "tp": int(tp)},
         "training_metrics": evaluate(model, x_train, y_train),
         "training_metrics_note": "Training-set scores are for overfitting checks only and are NOT holdout results.",
+        "global_importance": global_importance(model, x_test),
         "trained_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
 

@@ -1,8 +1,8 @@
 """Database tables."""
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, Float, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
@@ -33,3 +33,20 @@ class Customer(Base):
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)
+
+    action: Mapped["RetentionAction | None"] = relationship(
+        back_populates="customer", uselist=False, cascade="all, delete-orphan", lazy="selectin"
+    )
+
+
+class RetentionAction(Base):
+    __tablename__ = "retention_actions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    customer_pk: Mapped[int] = mapped_column(ForeignKey("customers.id"), unique=True)
+    rule_id: Mapped[str] = mapped_column(String(40))
+    action: Mapped[str] = mapped_column(String(300))
+    status: Mapped[str] = mapped_column(String(20), default="Pending", index=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)
+
+    customer: Mapped[Customer] = relationship(back_populates="action")

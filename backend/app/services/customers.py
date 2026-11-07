@@ -9,16 +9,18 @@ from app.services.fields import FEATURE_NAMES, ID_COLUMN
 PREDICTION_COLUMNS = ["churn_probability", "risk_category"]
 
 
-def upsert_customers(db: Session, data: pd.DataFrame) -> tuple[int, int]:
-    """Insert new customers and update existing ones. Returns (inserted, updated).
+def upsert_customers(db: Session, data: pd.DataFrame) -> tuple[int, int, list[Customer]]:
+    """Insert new customers and update existing ones.
 
     `data` holds validated features plus, when available, prediction columns.
+    Returns (inserted, updated, customers in the same order as `data`).
     """
     stored_columns = FEATURE_NAMES + [c for c in PREDICTION_COLUMNS if c in data.columns]
     ids = data[ID_COLUMN].tolist()
     existing = {c.customer_id: c for c in db.scalars(select(Customer).where(Customer.customer_id.in_(ids)))}
 
     inserted = updated = 0
+    customers = []
     for record in data.to_dict(orient="records"):
         customer = existing.get(record[ID_COLUMN])
         if customer is None:
@@ -29,8 +31,9 @@ def upsert_customers(db: Session, data: pd.DataFrame) -> tuple[int, int]:
             updated += 1
         for name in stored_columns:
             setattr(customer, name, record[name])
+        customers.append(customer)
     db.commit()
-    return inserted, updated
+    return inserted, updated, customers
 
 
 def count_customers(db: Session) -> int:
@@ -66,3 +69,8 @@ def search_customers(
 
 def get_customer(db: Session, customer_id: str) -> Customer | None:
     return db.scalar(select(Customer).where(Customer.customer_id == customer_id))
+
+
+def to_frame(customer: Customer) -> pd.DataFrame:
+    """One stored customer as a validated-data row (for explaining)."""
+    return pd.DataFrame([{ID_COLUMN: customer.customer_id, **{n: getattr(customer, n) for n in FEATURE_NAMES}}])
