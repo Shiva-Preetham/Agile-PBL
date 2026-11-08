@@ -45,7 +45,8 @@ export function CustomerDetail({ customerId, onBack }: { customerId: string; onB
   if (!profile || !explanation || !recommendation) return <Spinner />;
 
   const risk = profile.risk_category;
-  const chartData = [...explanation.factors].reverse().map((f) => ({
+  // Strongest factor first, so it appears at the top of the chart.
+  const chartData = explanation.factors.map((f) => ({
     name: `${f.label} = ${f.value}`,
     contribution: f.contribution,
   }));

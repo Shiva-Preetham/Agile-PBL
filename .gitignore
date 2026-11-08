@@ -26,3 +26,6 @@ Thumbs.db
 
 # Temporary setup folder (not part of the project)
 churnsense/
+
+# Local tool config
+.claude/
