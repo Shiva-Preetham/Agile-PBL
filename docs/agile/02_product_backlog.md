@@ -34,11 +34,12 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US08 | As a **Retention Manager**, I want a suggested retention action so that I can decide on a suitable next step. | Should | 3 | S3 | ✅ Prototype |
 | US09 | As a **Retention Manager**, I want to update a retention-action status so that follow-up can be tracked. | Should | 3 | S3 | ✅ Prototype |
 | US10 | As a **Retention Manager**, I want a dashboard summary of churn risk so that I can understand the overall customer portfolio. | Should | 3 | S3 | ✅ Prototype |
-| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 129 tests |
+| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 142 tests |
 | US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | 🟡 1 of 5 smells fixed |
 | US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | ✅ CI green |
 | US14 🆕 | As a **Retention Manager**, I want the *Next Best Action* for a specific at-risk customer, ranked by how much each action is estimated to lower their churn, so that I choose the action most likely to keep that customer. | Should | 5 | S4 | ✅ Done |
-| | **Total** | | **51** | | |
+| US15 🆕 | As a **Faculty reviewer**, I want to open ChurnSense from a web link so that I can try it without installing anything or running servers. | Should | 3 | S4 | 🔨 Code ready, awaiting first deploy |
+| | **Total** | | **54** | | |
 
 > **Backlog change (2026-11-08):** the Product Owner added **US14** after reviewing Prototype v0.1. Scope grew from 46 to 51 SP. This is Agile *responding to change*: the new story is ordered by value and pulled into Sprint 4.
 
@@ -59,6 +60,7 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US11 | Tests cover validation, risk, prediction, recommendation rules and key API flows; one documented command runs them. | `pytest` |
 | US12 | At least one real smell is refactored; duplicated or oversized logic is improved; tests still pass. | Before/after in `08_refactoring_and_retro.md` |
 | US13 | GitHub Actions runs tests and style checks; failures are visible and not silently ignored. | `.github/workflows/ci.yml` |
+| US15 | The app opens from a public link with demo data already loaded; the API accepts calls only from the local dev server and Vercel sites; tests also pass on PostgreSQL; the backend deploys only when CI is green; a sleeping server shows a 'waking up' message. | `test_deployment.py`, CI `backend-postgres` job |
 | US14 | Only actions that apply to the customer are simulated; each option shows the estimated churn after the action; options are ranked by estimated reduction and the top one is the Next Best Action; a step-by-step plan adds actions until the customer is Low risk or nothing more helps; estimates are labelled as model what-if estimates and marked for human review; Low-risk customers get no action. | `test_next_best_action.py`, `test_api_next_best_action.py` |
 
 ## INVEST check (sample)

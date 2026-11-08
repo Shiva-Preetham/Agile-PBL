@@ -5,12 +5,13 @@
 ### Explainable Customer Churn Prediction: **Predict · Explain · Act**
 
 [![CI](https://github.com/Shiva-Preetham/Agile-PBL/actions/workflows/ci.yml/badge.svg)](https://github.com/Shiva-Preetham/Agile-PBL/actions/workflows/ci.yml)
-![Tests](https://img.shields.io/badge/tests-129%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-142%20passing-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=black)
 ![XGBoost](https://img.shields.io/badge/ML-XGBoost%20%2B%20SHAP-orange)
 ![Status](https://img.shields.io/badge/status-Prototype%20v0.1-blueviolet)
+![Hosting](https://img.shields.io/badge/hosted%20on-Vercel%20%2B%20Render-000000?logo=vercel&logoColor=white)
 
 *Agile PBL project for **Fundamentals of Agile Software Development Lab (26B16CS314)**, JIIT Noida*
 
@@ -35,6 +36,19 @@ Companies lose money when customers quietly leave ("churn"). ChurnSense helps an
 
 ---
 
+## 🌐 Live demo
+
+| | Link |
+|---|---|
+| 🖥️ **App** (Vercel) | _link added after the first deploy_ |
+| ⚙️ **API docs** (Render) | _link added after the first deploy_ |
+
+No installation needed. The demo opens with 250 sample customers already loaded.
+The free server sleeps when idle, so the **first visit can take about a minute**; a banner explains this while it wakes up.
+How it is deployed (and how to redeploy): [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+
+---
+
 ## 🧭 Agile at the heart of the project
 
 The course is about **how** software is built. Every syllabus module has evidence in this repo:
@@ -47,7 +61,7 @@ The course is about **how** software is built. Every syllabus module has evidenc
 | 4 | Estimation & Sprint Monitoring | [docs/agile/04_estimation_and_burndown.md](docs/agile/04_estimation_and_burndown.md): planning poker, capacity, velocity, burndown |
 | 5 | XP Practices | [docs/agile/05_xp_practices.md](docs/agile/05_xp_practices.md): incremental sprints, a SHAP *spike*, CI, pair programming |
 | 6 | Kanban & Crystal | [docs/agile/06_kanban_and_crystal.md](docs/agile/06_kanban_and_crystal.md): board with WIP limits, flow metrics, Crystal Clear D6 |
-| 7 | Agile Testing & TDD | [docs/agile/07_testing_tdd.md](docs/agile/07_testing_tdd.md): tests committed **before** code each sprint, 129 tests, acceptance + exploratory testing, CI |
+| 7 | Agile Testing & TDD | [docs/agile/07_testing_tdd.md](docs/agile/07_testing_tdd.md): tests committed **before** code each sprint, 142 tests, acceptance + exploratory testing, CI |
 | 8 | Refactoring | [docs/agile/08_refactoring_and_retro.md](docs/agile/08_refactoring_and_retro.md): 5 real code smells found, 1 fixed with before/after, retrospective |
 
 ### 🔴🟢 TDD you can see in the git history
@@ -68,7 +82,7 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 | S1 Foundation | Customer data workflow | US01–US03 | 11 | ✅ in prototype |
 | S2 Prediction | Churn prediction MVP | US04–US06 | 10 | ✅ in prototype |
 | S3 Decision Support | Explainable decisions | US07–US10 | 14 | ✅ in prototype |
-| S4 Quality & Release | Tested, refactored release + Next Best Action | US11–US14 | 16 | 🟡 tests, CI and US14 done; 1 of 5 smells refactored, rest after feedback |
+| S4 Quality & Release | Tested, refactored, hosted release + Next Best Action | US11–US15 | 19 | 🟡 tests, CI, US14 and deploy setup done; 1 of 5 smells refactored, rest after feedback |
 
 ---
 
@@ -88,7 +102,7 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 | 3 | ⚙️ **Backend API** | Receives every request and runs the **6-step service pipeline** for each customer | FastAPI, Python 3.11, Pydantic | `backend/app` |
 | 4 | 🗄️ **Data** | Stores customers, predictions and follow-up actions; holds the trained model files | SQLAlchemy 2 (SQLite → PostgreSQL) | `backend/app/models.py`, `backend/models/` |
 | 5 | 🧪 **Offline ML pipeline** | Generates the training data, trains XGBoost once, records honest holdout scores | pandas, scikit-learn, XGBoost, SHAP | `backend/ml/` |
-| 6 | ✅ **Quality & delivery** | Every push runs style checks, 129 tests and the frontend build | Pytest, flake8, GitHub Actions | `.github/workflows/ci.yml` |
+| 6 | ✅ **Quality & delivery** | Every push runs style checks, 142 tests on SQLite **and** PostgreSQL, and the frontend build; Render deploys only when all are green | Pytest, flake8, GitHub Actions, Render, Vercel | `.github/workflows/ci.yml`, `render.yaml` |
 
 **The service pipeline in one line:** ① check the data → ② predict churn → ③ label the risk → ④ explain *why* → ⑤ pick the action that helps most → ⑥ track the follow-up.
 
@@ -161,10 +175,10 @@ sequenceDiagram
 |---|---|
 | Frontend | React 18, TypeScript, Vite, Recharts |
 | Backend / API | Python 3.11, FastAPI, Pydantic, SQLAlchemy 2 |
-| Database | SQLite for the prototype (switch to PostgreSQL with `DATABASE_URL`) |
+| Database | PostgreSQL on Render (hosted demo) · SQLite for local development, chosen with `DATABASE_URL` |
 | ML / XAI | Pandas, NumPy, scikit-learn, XGBoost, SHAP |
 | Testing / Quality | Pytest (unit + API), flake8, TypeScript strict mode |
-| Version control / CI | Git, GitHub, GitHub Actions |
+| Version control / CI / CD | Git, GitHub, GitHub Actions → auto-deploy to Render (backend) and Vercel (frontend) |
 
 ---
 
@@ -232,10 +246,11 @@ Trained on 2,400 customers and tested on 600 held-out customers. Training-set sc
 │   ├── ml/                 # data generator + training script
 │   ├── data/               # training data and sample CSVs
 │   ├── models/             # trained model + metrics.json
-│   └── tests/              # 129 pytest tests (written test-first)
+│   └── tests/              # 142 pytest tests (written test-first)
 ├── frontend/src/           # React + TypeScript UI
 ├── docs/agile/             # Agile artifacts, one file per syllabus module
-└── .github/workflows/      # CI: tests + style + frontend build
+├── .github/workflows/      # CI: tests (SQLite + PostgreSQL) + style + frontend build
+└── render.yaml             # Render Blueprint: backend + PostgreSQL
 ```
 
 ---

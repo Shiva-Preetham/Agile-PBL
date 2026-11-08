@@ -88,7 +88,7 @@
   <!-- ===== Frontend ===== -->
   <rect class="fe" x="40" y="190" width="720" height="152" rx="14"/>
   <text class="label fe-t" x="60" y="216">FRONTEND</text>
-  <text class="s" x="150" y="216">React 18 · TypeScript · Vite · Recharts  ·  frontend/src</text>
+  <text class="s" x="150" y="216">React 18 · TypeScript · Vite · Recharts  ·  hosted on Vercel</text>
 
   <rect class="card" x="60" y="230" width="161" height="96" rx="10"/>
   <text class="h" x="74" y="254">Dashboard</text>
@@ -122,7 +122,7 @@
   <!-- ===== Backend ===== -->
   <rect class="be" x="40" y="380" width="720" height="496" rx="14"/>
   <text class="label be-t" x="60" y="406">BACKEND API</text>
-  <text class="s" x="172" y="406">FastAPI · Python 3.11 · Pydantic  ·  backend/app</text>
+  <text class="s" x="172" y="406">FastAPI · Python 3.11 · Pydantic  ·  hosted on Render</text>
 
   <rect class="card" x="60" y="420" width="300" height="72" rx="10"/>
   <text class="h13 mono be-t" x="74" y="443">/api/customers</text>
@@ -233,7 +233,7 @@
   <text class="h" x="120" y="976">Database</text>
   <text class="s" x="120" y="995">customers: 10 fields + probability + risk</text>
   <text class="s" x="120" y="1012">retention_actions: rule · action · status</text>
-  <text class="xs da-t" x="120" y="1029">SQLite now → PostgreSQL via DATABASE_URL</text>
+  <text class="xs da-t" x="120" y="1029">PostgreSQL on Render · SQLite locally</text>
 
   <rect class="card" x="475" y="954" width="265" height="86" rx="10"/>
   <path class="da" d="M491,966 h17 l8,8 v28 h-25 z"/>
@@ -289,7 +289,7 @@
   <text class="s" x="935" y="845" text-anchor="middle" style="fill:var(--text)">flake8 · style rules</text>
   <line class="flow" x1="935" y1="859" x2="935" y2="870" marker-end="url(#a)"/>
   <rect class="card" x="808" y="872" width="254" height="36" rx="18"/>
-  <text class="s" x="935" y="895" text-anchor="middle" style="fill:var(--text)">pytest · 129 tests (written first)</text>
+  <text class="s" x="935" y="895" text-anchor="middle" style="fill:var(--text)">pytest · 142 tests · SQLite + Postgres</text>
   <line class="flow" x1="935" y1="909" x2="935" y2="920" marker-end="url(#a)"/>
   <rect class="card" x="808" y="922" width="254" height="36" rx="18"/>
   <text class="s" x="935" y="945" text-anchor="middle" style="fill:var(--text)">tsc + vite build · frontend</text>
@@ -297,8 +297,8 @@
   <rect class="ok-pill" x="808" y="972" width="254" height="36" rx="18"/>
   <circle class="ok-f" cx="862" cy="990" r="8"/>
   <path d="M858,990 l3,3 l5,-6" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text class="s ok-t" x="878" y="995">All green → safe to merge</text>
-  <text class="xs" x="935" y="1034" text-anchor="middle">a failing check is visible on GitHub</text>
+  <text class="s ok-t" x="878" y="995">All green → Render deploys</text>
+  <text class="xs" x="935" y="1034" text-anchor="middle">a failing check blocks the deploy</text>
 
   <!-- ===== Footer ===== -->
   <text class="s" x="560" y="1088" text-anchor="middle">Scrum + Kanban · 4 sprints · tests written first (TDD) · CI on every push · Agile docs in docs/agile/</text>
