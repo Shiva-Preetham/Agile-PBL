@@ -84,3 +84,41 @@ class RecommendationOut(BaseModel):
 
 class StatusUpdate(BaseModel):
     status: str
+
+
+class SuggestionOut(BaseModel):
+    rule_id: str
+    action: str
+    reason: str
+    requires_human_review: bool
+
+
+class ActionOptionOut(BaseModel):
+    rule_id: str
+    action: str
+    cost: str
+    change_text: list[str]
+    new_probability: float
+    new_risk: str
+    reduction: float
+    score_drop: float
+
+
+class PlanStepOut(BaseModel):
+    rule_id: str
+    action: str
+    probability: float
+    risk: str
+
+
+class NextBestActionOut(BaseModel):
+    customer_id: str
+    current_probability: float
+    current_risk: str
+    best: SuggestionOut
+    options: list[ActionOptionOut]
+    plan: list[PlanStepOut]
+    note: str = (
+        "What-if estimates: the customer is re-scored by the model after each simulated action. "
+        "They show what the model learned from data, not a guaranteed result. A person decides."
+    )

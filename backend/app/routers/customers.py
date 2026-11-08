@@ -1,7 +1,7 @@
 """Customer endpoints.
 
 US01 upload · US02 search · US03 profile · US07 explanation ·
-US08 recommendation · US09 action status
+US08 recommendation · US09 action status · US14 next best action
 """
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy.orm import Session
@@ -13,17 +13,21 @@ from app.schemas import (
     CustomerPage,
     CustomerProfile,
     CustomerSummary,
+    ActionOptionOut,
     ExplanationOut,
     FactorOut,
+    NextBestActionOut,
+    PlanStepOut,
     RecommendationOut,
     StatusUpdate,
+    SuggestionOut,
     UploadResult,
 )
 from app.services import actions as action_service
 from app.services import customers as customer_service
 from app.services.explain import Explanation, explain
+from app.services.next_best_action import NextBestAction, next_best_actions
 from app.services.prediction import score_customers
-from app.services.recommend import recommend
 from app.services.validation import validate_csv_bytes
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
@@ -40,11 +44,8 @@ async def upload_customers(file: UploadFile = File(...), db: Session = Depends(g
 
     scored = score_customers(result.data)
     inserted, updated, customers = customer_service.upsert_customers(db, scored)
-    recommendations = [
-        recommend(risk, explanation.factors)
-        for risk, explanation in zip(scored["risk_category"], explain(result.data))
-    ]
-    action_service.sync_actions(db, customers, recommendations)
+    plans = next_best_actions(result.data, explain(result.data))
+    action_service.sync_actions(db, customers, [plan.best for plan in plans])
 
     return UploadResult(
         inserted=inserted, updated=updated, total_customers=customer_service.count_customers(db)
@@ -95,8 +96,8 @@ def get_explanation(customer_id: str, top: int = Query(5, ge=1, le=10), db: Sess
 
 @router.get("/{customer_id}/recommendation", response_model=RecommendationOut)
 def get_recommendation(customer_id: str, db: Session = Depends(get_db)):
-    customer, explanation = _find_and_explain(db, customer_id)
-    suggestion = recommend(customer.risk_category, explanation.factors)
+    customer, plan = _find_and_plan(db, customer_id)
+    suggestion = plan.best
     return RecommendationOut(
         customer_id=customer.customer_id,
         risk_category=customer.risk_category,
@@ -104,6 +105,27 @@ def get_recommendation(customer_id: str, db: Session = Depends(get_db)):
         action=suggestion.action,
         reason=suggestion.reason,
         requires_human_review=suggestion.requires_human_review,
+    )
+
+
+@router.get("/{customer_id}/next-best-action", response_model=NextBestActionOut)
+def get_next_best_action(customer_id: str, db: Session = Depends(get_db)):
+    customer, plan = _find_and_plan(db, customer_id)
+    best = plan.best
+    return NextBestActionOut(
+        customer_id=customer.customer_id,
+        current_probability=plan.current_probability,
+        current_risk=plan.current_risk,
+        best=SuggestionOut(rule_id=best.rule_id, action=best.action, reason=best.reason,
+                           requires_human_review=best.requires_human_review),
+        options=[
+            ActionOptionOut(rule_id=o.rule_id, action=o.action, cost=o.cost, change_text=o.change_text,
+                            new_probability=o.new_probability, new_risk=o.new_risk,
+                            reduction=o.reduction, score_drop=round(o.score_drop, 4))
+            for o in plan.options
+        ],
+        plan=[PlanStepOut(rule_id=s.rule_id, action=s.action, probability=s.probability, risk=s.risk)
+              for s in plan.plan],
     )
 
 
@@ -132,3 +154,9 @@ def _find_and_explain(db: Session, customer_id: str) -> tuple[Customer, Explanat
     """Look up a stored customer and explain their current prediction."""
     customer = _find(db, customer_id)
     return customer, explain(customer_service.to_frame(customer))[0]
+
+
+def _find_and_plan(db: Session, customer_id: str) -> tuple[Customer, NextBestAction]:
+    """Look up a stored customer and work out their Next Best Action and retention plan."""
+    customer, explanation = _find_and_explain(db, customer_id)
+    return customer, next_best_actions(customer_service.to_frame(customer), [explanation])[0]
