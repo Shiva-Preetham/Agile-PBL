@@ -45,10 +45,10 @@ The course is about **how** software is built. Every syllabus module has evidenc
 | 2 | Agile Manifesto & User Stories | [docs/agile/02_product_backlog.md](docs/agile/02_product_backlog.md): 13 user stories, MoSCoW, INVEST, acceptance criteria |
 | 3 | Scrum Framework | [docs/agile/03_scrum_framework.md](docs/agile/03_scrum_framework.md): roles, sprint goals, Definition of Done, stand-up |
 | 4 | Estimation & Sprint Monitoring | [docs/agile/04_estimation_and_burndown.md](docs/agile/04_estimation_and_burndown.md): planning poker, capacity, velocity, burndown |
-| 5 | XP Practices | Small increments per sprint, a SHAP *spike* before building, Git + GitHub Actions CI ([commit history](https://github.com/Shiva-Preetham/Agile-PBL/commits/main)) |
+| 5 | XP Practices | [docs/agile/05_xp_practices.md](docs/agile/05_xp_practices.md): incremental sprints, a SHAP *spike*, CI, pair programming |
 | 6 | Kanban & Crystal | [docs/agile/06_kanban_and_crystal.md](docs/agile/06_kanban_and_crystal.md): board with WIP limits, flow metrics, Crystal Clear D6 |
-| 7 | Agile Testing & TDD | Tests committed **before** code in every sprint (`[TDD RED]` → `[TDD GREEN]` commits); 106 pytest tests; CI |
-| 8 | Refactoring | Planned for Sprint 4, after faculty feedback (US12) |
+| 7 | Agile Testing & TDD | [docs/agile/07_testing_tdd.md](docs/agile/07_testing_tdd.md): tests committed **before** code each sprint, 106 tests, acceptance + exploratory testing, CI |
+| 8 | Refactoring | [docs/agile/08_refactoring_and_retro.md](docs/agile/08_refactoring_and_retro.md): 5 real code smells found, 1 fixed with before/after, retrospective |
 
 ### 🔴🟢 TDD you can see in the git history
 
@@ -68,7 +68,7 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 | S1 Foundation | Customer data workflow | US01–US03 | 11 | ✅ in prototype |
 | S2 Prediction | Churn prediction MVP | US04–US06 | 10 | ✅ in prototype |
 | S3 Decision Support | Explainable decisions | US07–US10 | 14 | ✅ in prototype |
-| S4 Quality & Release | Tested, refactored release | US11–US13 | 11 | 🟡 tests + CI started; refactoring after feedback |
+| S4 Quality & Release | Tested, refactored release | US11–US13 | 11 | 🟡 tests + CI done; 1 of 5 smells refactored, rest after feedback |
 
 ---
 
@@ -179,4 +179,4 @@ Trained on 2,400 customers and tested on 600 held-out customers. Training-set sc
 
 ## 🔁 Next: feedback → backlog
 
-This is **Prototype v0.1** for the first faculty review. Feedback from the review becomes new or updated backlog items for the next sprint: *inspect and adapt*.
+This is **Prototype v0.1** for the first faculty review. The demo script and Q&A are in [docs/FACULTY_REVIEW_GUIDE.md](docs/FACULTY_REVIEW_GUIDE.md). Feedback from the review becomes new or updated backlog items for the next sprint: *inspect and adapt*.

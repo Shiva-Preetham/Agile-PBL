@@ -1,0 +1,89 @@
+# ChurnSense: Faculty Review Guide (Prototype v0.1)
+
+> A presenter's script for the first Sprint Review. Simple words, a clear demo, and a plan for collecting feedback.
+
+---
+
+## 1. The 30-second pitch
+
+> "Businesses lose customers without warning. **ChurnSense** looks at customer data and does three things:
+> it **predicts** who is likely to leave, it **explains why** in plain language, and it **suggests what to do**, then tracks the follow-up.
+> We built it the **Agile way**: four short sprints, tests written *before* code, and a working version after every sprint.
+> Today we're showing Prototype v0.1 and we'd like your feedback to plan the next sprint."
+
+## 2. A simple analogy
+
+ChurnSense works like a **doctor's visit** for customers:
+
+| Doctor | ChurnSense |
+|---|---|
+| Takes your vitals (blood pressure, pulse) | Reads customer data (contract, charges, logins, tickets) |
+| **Diagnosis**: "You're at high risk" | **Prediction**: "87% likely to leave, High risk" |
+| **Reason**: "because of high cholesterol" | **SHAP explanation**: "because of a month-to-month contract" |
+| **Prescription**: "exercise and diet" | **Retention action**: "offer a 12-month contract discount" |
+| A human doctor makes the final call | Every suggestion is marked **"needs human review"** |
+| Follow-up appointments | Status tracking: Pending → Contacted → Completed |
+
+## 3. Who presents what
+
+| Part | Presenter | Time |
+|---|---|---|
+| Pitch + Agile process (backlog, sprints, Waterfall vs Agile) | Shiva (Product Owner) | 2 min |
+| Live demo | Artham (Scrum Master), Shiva explains ML | 4 min |
+| Tests, CI, TDD evidence, refactoring | Artham | 1 min |
+| Ask for feedback | Both | 2+ min |
+
+## 4. Demo script (about 7 minutes)
+
+**Before the review:** start the backend (`uvicorn app.main:app` in `backend/`) and the frontend (`npm run dev` in `frontend/`). Delete `backend/churnsense.db` for a clean start.
+
+| # | Do this | Say this | Syllabus link |
+|---|---|---|---|
+| 1 | Open the **Dashboard** (empty) | "With no data, the app shows a friendly message instead of crashing. That was an acceptance criterion." | Module 2 (acceptance criteria) |
+| 2 | **Customers** → upload `sample_invalid_rows.csv` | "Bad data is rejected **row by row**: wrong number, unknown contract type, negative charge, duplicate ID, missing value. Nothing is saved." | US01, TDD |
+| 3 | Upload `sample_customers.csv` | "250 customers validated, and every one gets a churn probability in about a second." | US01, US04 |
+| 4 | Search and filter by **High** risk | "Highest risk is always listed first, so managers know who to call." | US02, US05 |
+| 5 | Open the top customer | "98% churn probability. **Why?** The red bars are the reasons: the biggest is 51 days since last login. The system suggests a re-engagement campaign, and a human must review it." | US03, US07, US08 |
+| 6 | Click **Mark as Contacted** | "Follow-up is tracked and saved. You can't skip from Pending straight to Completed; a test checks that." | US09 |
+| 7 | Back to **Dashboard** | "Portfolio view: risk mix, risk by contract type, follow-up progress. Filters update everything." | US10 |
+| 8 | **Model** page | "Scores are measured on 600 customers the model **never saw** during training. ROC-AUC 0.83. Training scores are kept separate so we don't fool ourselves." | US06 |
+| 9 | What-if: change **Month-to-month → Two year** | "Same customer, only the contract changes, and the risk drops from 96% to 76%. That's why the system suggests contract upgrades." | US04 |
+| 10 | Open GitHub → **commits** | "Every sprint has a RED commit (tests fail) and then a GREEN commit (tests pass). That is TDD you can see." | Module 7 |
+| 11 | GitHub → **Actions** tab | "106 tests and a style check run automatically on every push." | Modules 5, 7 |
+
+## 5. How each syllabus module appears in the project
+
+| Module | One-line answer | Where to show it |
+|---|---|---|
+| 1 Waterfall vs Agile | Same project planned both ways; Agile gives feedback after week 4, not week 14 | `docs/agile/01_waterfall_vs_agile.md` |
+| 2 User stories | 13 stories in "As a… I want… so that…" form with acceptance criteria | `docs/agile/02_product_backlog.md` |
+| 3 Scrum | PO + Scrum Master roles, sprint goals, Definition of Done | `docs/agile/03_scrum_framework.md` |
+| 4 Estimation | Planning poker, 46 story points, burndown chart | `docs/agile/04_estimation_and_burndown.md` |
+| 5 XP | Incremental sprints, a spike, CI, pair programming | `docs/agile/05_xp_practices.md` |
+| 6 Kanban & Crystal | WIP limits, cycle time, Crystal Clear D6 | `docs/agile/06_kanban_and_crystal.md` |
+| 7 Testing & TDD | 106 tests written first, boundary tests, GitHub Actions | `docs/agile/07_testing_tdd.md` |
+| 8 Refactoring | 5 code smells found, 1 fixed with before/after, retrospective | `docs/agile/08_refactoring_and_retro.md` |
+
+## 6. Questions faculty may ask, with short answers
+
+| Question | Answer |
+|---|---|
+| **Where is the data from?** | It's synthetic (generated by our script with a fixed seed), so there are no privacy issues and results are reproducible. The real IBM Telco churn dataset can be plugged in without code changes. |
+| **Why XGBoost?** | It's strong on table data, fast, and works directly with SHAP's exact tree explainer. |
+| **What is SHAP, simply?** | It splits a prediction into "how much each field pushed the score up or down". The parts always add up to the model's answer; we test that. |
+| **Why are the risk thresholds 40% and 70%?** | They are documented business rules, easy to change, and tested at the exact boundary values. |
+| **Recall is only 0.54. Is that bad?** | At a 0.5 cut-off the model misses some churners. The ranking quality (ROC-AUC 0.83) is good, so we can lower the cut-off to catch more churners at the cost of more false alarms. That trade-off is a good topic for feedback. |
+| **Why SQLite, not PostgreSQL?** | Simple design (YAGNI) for the prototype. PostgreSQL needs only a `DATABASE_URL` change because we use SQLAlchemy. |
+| **How do we know it's Agile and not built all at once?** | The git history shows the sprints in order, with tests committed before code in each one. |
+| **Can the AI act automatically?** | No. Every suggestion requires human review; the system only advises. |
+
+## 7. Feedback capture (fill in during the review)
+
+| # | Feedback from faculty | Type (new story / change / bug / question) | Becomes backlog item | Priority |
+|---|---|---|---|---|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+| 4 | | | | |
+
+After the review, the Product Owner adds these items to [02_product_backlog.md](agile/02_product_backlog.md) and the Kanban board, and the team re-prioritises for Sprint 4. This is Scrum's **inspect and adapt** loop.

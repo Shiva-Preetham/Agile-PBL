@@ -34,9 +34,9 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US08 | As a **Retention Manager**, I want a suggested retention action so that I can decide on a suitable next step. | Should | 3 | S3 | ✅ Prototype |
 | US09 | As a **Retention Manager**, I want to update a retention-action status so that follow-up can be tracked. | Should | 3 | S3 | ✅ Prototype |
 | US10 | As a **Retention Manager**, I want a dashboard summary of churn risk so that I can understand the overall customer portfolio. | Should | 3 | S3 | ✅ Prototype |
-| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | 🟡 Started |
-| US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | ⏳ After feedback |
-| US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | 🟡 Started |
+| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 106 tests |
+| US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | 🟡 1 of 5 smells fixed |
+| US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | ✅ CI green |
 | | **Total** | | **46** | | |
 
 ## Acceptance criteria
