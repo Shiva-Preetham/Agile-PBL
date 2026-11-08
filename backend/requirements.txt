@@ -1,11 +1,15 @@
+# Runtime dependencies (what the hosted server installs).
+# For tests and style checks use: pip install -r requirements-dev.txt
+
 # API
 fastapi==0.162.0
 uvicorn[standard]==0.54.0
 python-multipart==0.0.33
 pydantic==2.14.3
 
-# Database (SQLite for the prototype, PostgreSQL-ready through DATABASE_URL)
+# Database: SQLite locally, PostgreSQL when DATABASE_URL points to one
 SQLAlchemy==2.1.8
+psycopg[binary]==3.3.8
 
 # Data / ML / Explainability
 pandas==3.1.1
@@ -13,8 +17,3 @@ numpy==2.4.6
 scikit-learn==1.9.1
 xgboost==3.2.0
 shap==0.51.0
-
-# Testing & quality
-pytest==9.2.0
-httpx==0.28.1
-flake8==7.5.0

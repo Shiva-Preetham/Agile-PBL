@@ -26,8 +26,8 @@ from app.schemas import (
 from app.services import actions as action_service
 from app.services import customers as customer_service
 from app.services.explain import Explanation, explain
+from app.services.ingest import ingest_customers
 from app.services.next_best_action import NextBestAction, next_best_actions
-from app.services.prediction import score_customers
 from app.services.validation import validate_csv_bytes
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
@@ -42,11 +42,7 @@ async def upload_customers(file: UploadFile = File(...), db: Session = Depends(g
     if not result.is_valid:
         raise HTTPException(400, detail={"errors": result.errors})
 
-    scored = score_customers(result.data)
-    inserted, updated, customers = customer_service.upsert_customers(db, scored)
-    plans = next_best_actions(result.data, explain(result.data))
-    action_service.sync_actions(db, customers, [plan.best for plan in plans])
-
+    inserted, updated = ingest_customers(db, result.data)
     return UploadResult(
         inserted=inserted, updated=updated, total_customers=customer_service.count_customers(db)
     )
