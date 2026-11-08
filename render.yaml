@@ -1,0 +1,26 @@
+# Render Blueprint: backend API + free PostgreSQL.
+# Render → New → Blueprint → pick this repository. Full guide: docs/DEPLOYMENT.md
+services:
+  - type: web
+    name: churnsense-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    # Deploy only after GitHub Actions (tests + style + build) passes on the commit.
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9          # same version as local development and CI
+      - key: SEED_DEMO_DATA
+        value: "true"          # fill an empty database with the 250 sample customers
+      - key: DATABASE_URL
+        fromDatabase:
+          name: churnsense-db
+          property: connectionString
+
+databases:
+  - name: churnsense-db
+    plan: free               # note: Render's free PostgreSQL expires 30 days after creation
