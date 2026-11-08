@@ -7,8 +7,10 @@ import csv
 import io
 import os
 
-# Must be set before the app is imported so the app uses an in-memory DB.
-os.environ["DATABASE_URL"] = "sqlite://"
+# Set before the app is imported. Tests drop and recreate every table, so they
+# never use DATABASE_URL (which may point at real data). They use an in-memory
+# DB, or TEST_DATABASE_URL (CI sets it to run the suite on PostgreSQL too).
+os.environ["DATABASE_URL"] = os.environ.get("TEST_DATABASE_URL", "sqlite://")
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
