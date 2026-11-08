@@ -21,7 +21,7 @@ from app.schemas import (
 )
 from app.services import actions as action_service
 from app.services import customers as customer_service
-from app.services.explain import explain
+from app.services.explain import Explanation, explain
 from app.services.prediction import score_customers
 from app.services.recommend import recommend
 from app.services.validation import validate_csv_bytes
@@ -79,8 +79,7 @@ def get_customer_profile(customer_id: str, db: Session = Depends(get_db)):
 
 @router.get("/{customer_id}/explanation", response_model=ExplanationOut)
 def get_explanation(customer_id: str, top: int = Query(5, ge=1, le=10), db: Session = Depends(get_db)):
-    customer = _find(db, customer_id)
-    explanation = explain(customer_service.to_frame(customer))[0]
+    customer, explanation = _find_and_explain(db, customer_id)
     return ExplanationOut(
         customer_id=customer.customer_id,
         churn_probability=explanation.probability,
@@ -96,8 +95,7 @@ def get_explanation(customer_id: str, top: int = Query(5, ge=1, le=10), db: Sess
 
 @router.get("/{customer_id}/recommendation", response_model=RecommendationOut)
 def get_recommendation(customer_id: str, db: Session = Depends(get_db)):
-    customer = _find(db, customer_id)
-    explanation = explain(customer_service.to_frame(customer))[0]
+    customer, explanation = _find_and_explain(db, customer_id)
     suggestion = recommend(customer.risk_category, explanation.factors)
     return RecommendationOut(
         customer_id=customer.customer_id,
@@ -128,3 +126,9 @@ def _find(db: Session, customer_id: str) -> Customer:
     if customer is None:
         raise HTTPException(404, detail=f"Customer '{customer_id}' was not found.")
     return customer
+
+
+def _find_and_explain(db: Session, customer_id: str) -> tuple[Customer, Explanation]:
+    """Look up a stored customer and explain their current prediction."""
+    customer = _find(db, customer_id)
+    return customer, explain(customer_service.to_frame(customer))[0]
