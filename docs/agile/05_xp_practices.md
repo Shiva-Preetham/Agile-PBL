@@ -38,6 +38,22 @@ Each increment was **working and tested** before the next one started. For examp
 
 **Result:** `4.7429 ≈ 4.7429` and `-6.2239 ≈ -6.2239`, an exact match. This became an automated test (`test_contributions_add_up_to_the_model_output`).
 
+## The Next Best Action spike (US14)
+
+**Question:** If we simulate one retention action on a customer and re-score them, does the model's answer change enough to rank actions?
+
+**Result:**
+
+| Customer | Churn now | Effect of single actions |
+|---|---|---|
+| Typical at-risk | 89% | 7 to 13 points each (tech support best) |
+| Extreme | 99% | about 1 point each; probabilities flatten out near 100% |
+
+**Design decisions from the spike:**
+
+1. Rank actions by the drop in **log-odds** (the same unit as SHAP), which doesn't flatten near 100%.
+2. Add a **step-by-step plan** that stacks actions, because one action alone can't rescue an extreme customer.
+
 ## Pair programming (driver–navigator) with VS Code Live Share
 
 1. The driver installs the **Live Share** extension and clicks *Share*. The navigator joins with the link.
@@ -58,7 +74,7 @@ Each increment was **working and tested** before the next one started. For examp
 ```mermaid
 flowchart LR
     P[git push / pull request] --> GA[GitHub Actions]
-    GA --> B1[pip install] --> B2[flake8] --> B3[pytest: 106 tests]
+    GA --> B1[pip install] --> B2[flake8] --> B3[pytest: 129 tests]
     GA --> F1[npm ci] --> F2[tsc + vite build]
     B3 --> R{All green?}
     F2 --> R

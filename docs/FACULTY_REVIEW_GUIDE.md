@@ -43,13 +43,14 @@ ChurnSense works like a **doctor's visit** for customers:
 | 2 | **Customers** → upload `sample_invalid_rows.csv` | "Bad data is rejected **row by row**: wrong number, unknown contract type, negative charge, duplicate ID, missing value. Nothing is saved." | US01, TDD |
 | 3 | Upload `sample_customers.csv` | "250 customers validated, and every one gets a churn probability in about a second." | US01, US04 |
 | 4 | Search and filter by **High** risk | "Highest risk is always listed first, so managers know who to call." | US02, US05 |
-| 5 | Open the top customer | "98% churn probability. **Why?** The red bars are the reasons: the biggest is 51 days since last login. The system suggests a re-engagement campaign, and a human must review it." | US03, US07, US08 |
+| 5 | Open the top customer | "98% churn probability. **Why?** The red bars are the reasons: the biggest is 51 days since last login." | US03, US07 |
+| 5b | Point at **Next Best Action** and scroll to **Retention plan** | "The system tries every retention action on a *copy* of this customer and asks the model again. A re-engagement campaign helps most: 98% → 83%. Doing it, then a 12-month contract, then a loyalty discount brings the customer to **39%, Low risk**, so they are likely to stay. A human still decides." | US08, US14 |
 | 6 | Click **Mark as Contacted** | "Follow-up is tracked and saved. You can't skip from Pending straight to Completed; a test checks that." | US09 |
 | 7 | Back to **Dashboard** | "Portfolio view: risk mix, risk by contract type, follow-up progress. Filters update everything." | US10 |
 | 8 | **Model** page | "Scores are measured on 600 customers the model **never saw** during training. ROC-AUC 0.83. Training scores are kept separate so we don't fool ourselves." | US06 |
 | 9 | What-if: change **Month-to-month → Two year** | "Same customer, only the contract changes, and the risk drops from 96% to 76%. That's why the system suggests contract upgrades." | US04 |
 | 10 | Open GitHub → **commits** | "Every sprint has a RED commit (tests fail) and then a GREEN commit (tests pass). That is TDD you can see." | Module 7 |
-| 11 | GitHub → **Actions** tab | "106 tests and a style check run automatically on every push." | Modules 5, 7 |
+| 11 | GitHub → **Actions** tab | "129 tests and a style check run automatically on every push." | Modules 5, 7 |
 
 ## 5. How each syllabus module appears in the project
 
@@ -61,7 +62,7 @@ ChurnSense works like a **doctor's visit** for customers:
 | 4 Estimation | Planning poker, 46 story points, burndown chart | `docs/agile/04_estimation_and_burndown.md` |
 | 5 XP | Incremental sprints, a spike, CI, pair programming | `docs/agile/05_xp_practices.md` |
 | 6 Kanban & Crystal | WIP limits, cycle time, Crystal Clear D6 | `docs/agile/06_kanban_and_crystal.md` |
-| 7 Testing & TDD | 106 tests written first, boundary tests, GitHub Actions | `docs/agile/07_testing_tdd.md` |
+| 7 Testing & TDD | 129 tests written first, boundary tests, GitHub Actions | `docs/agile/07_testing_tdd.md` |
 | 8 Refactoring | 5 code smells found, 1 fixed with before/after, retrospective | `docs/agile/08_refactoring_and_retro.md` |
 
 ## 6. Questions faculty may ask, with short answers
@@ -76,6 +77,9 @@ ChurnSense works like a **doctor's visit** for customers:
 | **Why SQLite, not PostgreSQL?** | Simple design (YAGNI) for the prototype. PostgreSQL needs only a `DATABASE_URL` change because we use SQLAlchemy. |
 | **How do we know it's Agile and not built all at once?** | The git history shows the sprints in order, with tests committed before code in each one. |
 | **Can the AI act automatically?** | No. Every suggestion requires human review; the system only advises. |
+| **How is the Next Best Action chosen?** | Each action that applies to the customer (e.g. contract upgrade, loyalty discount) is simulated by changing a copy of the customer's data. The model re-scores it, and the action with the biggest drop wins. The plan keeps adding the next best action until the customer is Low risk. |
+| **Does that prove the action will work?** | No. It's a *what-if* estimate of what the model learned from data, not cause and effect. That's why it's labelled as an estimate and needs human review. A real A/B test of offers would be the next step. |
+| **Why was Next Best Action added after the synopsis?** | The Product Owner added US14 after reviewing the prototype. Changing the backlog when you learn something new is exactly what Agile allows. |
 
 ## 7. Feedback capture (fill in during the review)
 

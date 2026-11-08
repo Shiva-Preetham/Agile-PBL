@@ -5,7 +5,7 @@
 ### Explainable Customer Churn Prediction: **Predict · Explain · Act**
 
 [![CI](https://github.com/Shiva-Preetham/Agile-PBL/actions/workflows/ci.yml/badge.svg)](https://github.com/Shiva-Preetham/Agile-PBL/actions/workflows/ci.yml)
-![Tests](https://img.shields.io/badge/tests-106%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-129%20passing-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=black)
@@ -28,10 +28,10 @@ Companies lose money when customers quietly leave ("churn"). ChurnSense helps an
 | 2️⃣ **Predict** | An XGBoost model gives every customer a churn probability | `CS-10042 → 87%` |
 | 3️⃣ **Classify** | The probability becomes a risk level | 🟢 Low < 40% ≤ 🟠 Medium < 70% ≤ 🔴 High |
 | 4️⃣ **Explain** | SHAP shows *why*: the top factors behind the prediction | "Month-to-month contract **increases** risk" |
-| 5️⃣ **Act** | A transparent rule suggests a next step, reviewed by a human | "Offer a discounted 12-month contract" |
+| 5️⃣ **Act** | **Next Best Action**: every retention action is tried on a copy of the customer and re-scored; the one that lowers churn most wins, followed by a step-by-step plan to Low risk | "Re-engagement campaign: 98% → 83%. Plan: 3 actions → 39% (Low)" |
 | 6️⃣ **Track** | Follow-up moves Pending → Contacted → Completed on a dashboard | |
 
-> A raw score says *who* may leave. ChurnSense also says **why** and **what to do next**.
+> A raw score says *who* may leave. ChurnSense also says **why**, **what to do next**, and **how much it should help**. Every suggestion is reviewed by a human.
 
 ---
 
@@ -47,7 +47,7 @@ The course is about **how** software is built. Every syllabus module has evidenc
 | 4 | Estimation & Sprint Monitoring | [docs/agile/04_estimation_and_burndown.md](docs/agile/04_estimation_and_burndown.md): planning poker, capacity, velocity, burndown |
 | 5 | XP Practices | [docs/agile/05_xp_practices.md](docs/agile/05_xp_practices.md): incremental sprints, a SHAP *spike*, CI, pair programming |
 | 6 | Kanban & Crystal | [docs/agile/06_kanban_and_crystal.md](docs/agile/06_kanban_and_crystal.md): board with WIP limits, flow metrics, Crystal Clear D6 |
-| 7 | Agile Testing & TDD | [docs/agile/07_testing_tdd.md](docs/agile/07_testing_tdd.md): tests committed **before** code each sprint, 106 tests, acceptance + exploratory testing, CI |
+| 7 | Agile Testing & TDD | [docs/agile/07_testing_tdd.md](docs/agile/07_testing_tdd.md): tests committed **before** code each sprint, 129 tests, acceptance + exploratory testing, CI |
 | 8 | Refactoring | [docs/agile/08_refactoring_and_retro.md](docs/agile/08_refactoring_and_retro.md): 5 real code smells found, 1 fixed with before/after, retrospective |
 
 ### 🔴🟢 TDD you can see in the git history
@@ -68,7 +68,7 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 | S1 Foundation | Customer data workflow | US01–US03 | 11 | ✅ in prototype |
 | S2 Prediction | Churn prediction MVP | US04–US06 | 10 | ✅ in prototype |
 | S3 Decision Support | Explainable decisions | US07–US10 | 14 | ✅ in prototype |
-| S4 Quality & Release | Tested, refactored release | US11–US13 | 11 | 🟡 tests + CI done; 1 of 5 smells refactored, rest after feedback |
+| S4 Quality & Release | Tested, refactored release + Next Best Action | US11–US14 | 16 | 🟡 tests, CI and US14 done; 1 of 5 smells refactored, rest after feedback |
 
 ---
 
@@ -154,13 +154,13 @@ Trained on 2,400 customers and tested on 600 held-out customers. Training-set sc
 ├── backend/
 │   ├── app/
 │   │   ├── routers/        # REST endpoints (customers, model, dashboard)
-│   │   ├── services/       # validation, prediction, risk, explain, recommend, actions, dashboard
+│   │   ├── services/       # validation, prediction, risk, explain, recommend, next_best_action, actions, dashboard
 │   │   ├── models.py       # database tables
 │   │   └── main.py         # FastAPI app
 │   ├── ml/                 # data generator + training script
 │   ├── data/               # training data and sample CSVs
 │   ├── models/             # trained model + metrics.json
-│   └── tests/              # 106 pytest tests (written test-first)
+│   └── tests/              # 129 pytest tests (written test-first)
 ├── frontend/src/           # React + TypeScript UI
 ├── docs/agile/             # Agile artifacts, one file per syllabus module
 └── .github/workflows/      # CI: tests + style + frontend build

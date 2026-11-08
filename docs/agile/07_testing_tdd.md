@@ -21,10 +21,11 @@ For every sprint, the tests were committed and pushed **before** the code that m
 | S2 | `test(S2): … [TDD RED]`: 3 collection errors | `feat(S2): … [TDD GREEN]` | 54 passed |
 | S3 | `test(S3): … [TDD RED]`: `No module named app.services.explain` | `feat(S3): … [TDD GREEN]` | 106 passed |
 | S4 (started) | — | `refactor: extract _find_and_explain …` | 106 passed before **and** after |
+| US14 | `test(US14): … [TDD RED]`: `cannot import name 'next_best_action'` | `feat(US14): … [TDD GREEN]` | 129 passed |
 
 See the full [commit history](https://github.com/Shiva-Preetham/Agile-PBL/commits/main).
 
-## 3. Test inventory (106 automated tests)
+## 3. Test inventory (129 automated tests)
 
 | Test file | Tests | Type | User stories |
 |---|---|---|---|
@@ -37,6 +38,8 @@ See the full [commit history](https://github.com/Shiva-Preetham/Agile-PBL/commit
 | `test_recommend.py` | 17 | Unit | US08 |
 | `test_actions.py` | 12 | Unit (state transitions) | US09 |
 | `test_api_decisions.py` | 15 | API / integration | US07, US08, US09, US10 |
+| `test_next_best_action.py` | 18 | Unit (properties of ranking and plan) | US14 |
+| `test_api_next_best_action.py` | 5 | API / integration | US14 |
 
 **Run them all with one command (US11):**
 
@@ -82,4 +85,4 @@ Every test uses a fresh **in-memory database**, so tests never depend on each ot
 
 ## 7. Automation with GitHub Actions
 
-Every push and pull request runs flake8, all 106 pytest tests, and the TypeScript type-check + production build. A failing step turns the run red and is visible on GitHub. See [.github/workflows/ci.yml](../../.github/workflows/ci.yml).
+Every push and pull request runs flake8, all 129 pytest tests, and the TypeScript type-check + production build. A failing step turns the run red and is visible on GitHub. See [.github/workflows/ci.yml](../../.github/workflows/ci.yml).

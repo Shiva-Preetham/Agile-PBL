@@ -34,10 +34,10 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US08 | As a **Retention Manager**, I want a suggested retention action so that I can decide on a suitable next step. | Should | 3 | S3 | ✅ Prototype |
 | US09 | As a **Retention Manager**, I want to update a retention-action status so that follow-up can be tracked. | Should | 3 | S3 | ✅ Prototype |
 | US10 | As a **Retention Manager**, I want a dashboard summary of churn risk so that I can understand the overall customer portfolio. | Should | 3 | S3 | ✅ Prototype |
-| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 106 tests |
+| US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 129 tests |
 | US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | 🟡 1 of 5 smells fixed |
 | US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | ✅ CI green |
-| US14 🆕 | As a **Retention Manager**, I want the *Next Best Action* for a specific at-risk customer, ranked by how much each action is estimated to lower their churn, so that I choose the action most likely to keep that customer. | Should | 5 | S4 | 🔨 In progress |
+| US14 🆕 | As a **Retention Manager**, I want the *Next Best Action* for a specific at-risk customer, ranked by how much each action is estimated to lower their churn, so that I choose the action most likely to keep that customer. | Should | 5 | S4 | ✅ Done |
 | | **Total** | | **51** | | |
 
 > **Backlog change (2026-11-08):** the Product Owner added **US14** after reviewing Prototype v0.1. Scope grew from 46 to 51 SP. This is Agile *responding to change*: the new story is ordered by value and pulled into Sprint 4.
