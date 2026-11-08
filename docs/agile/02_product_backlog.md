@@ -37,25 +37,29 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US11 | As a **Tester**, I want automated unit and integration tests so that defects are detected before release. | Must | 5 | S4 | ✅ 106 tests |
 | US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | 🟡 1 of 5 smells fixed |
 | US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | ✅ CI green |
-| | **Total** | | **46** | | |
+| US14 🆕 | As a **Retention Manager**, I want the *Next Best Action* for a specific at-risk customer, ranked by how much each action is estimated to lower their churn, so that I choose the action most likely to keep that customer. | Should | 5 | S4 | 🔨 In progress |
+| | **Total** | | **51** | | |
+
+> **Backlog change (2026-11-08):** the Product Owner added **US14** after reviewing Prototype v0.1. Scope grew from 46 to 51 SP. This is Agile *responding to change*: the new story is ordered by value and pulled into Sprint 4.
 
 ## Acceptance criteria
 
 | ID | Acceptance criteria (measurable) | Automated test |
 |---|---|---|
 | US01 | A valid file with required columns is accepted; missing columns or unreadable rows produce a clear error. | `test_validation.py` |
-| US02 | Search by customer ID and attribute filters work; no matches display an empty state. | `test_api.py::test_search_*` |
-| US03 | Selected attributes and activity/usage metrics display; unknown IDs return a clear not-found result. | `test_api.py::test_profile_*` |
+| US02 | Search by customer ID and attribute filters work; no matches display an empty state. | `test_api_customers.py` |
+| US03 | Selected attributes and activity/usage metrics display; unknown IDs return a clear not-found result. | `test_api_customers.py` |
 | US04 | Valid inputs return a probability from 0 to 1; missing/invalid features are handled clearly; same model and input give reproducible output. | `test_prediction.py` |
 | US05 | Documented thresholds classify scores consistently; boundary values map to exactly one category and appear with the probability. | `test_risk.py` |
-| US06 | Holdout metrics (precision, recall, F1, ROC-AUC) are labeled clearly; training metrics are not shown as holdout results. | `test_api.py::test_model_metrics_*` |
+| US06 | Holdout metrics (precision, recall, F1, ROC-AUC) are labeled clearly; training metrics are not shown as holdout results. | `test_api_prediction.py` |
 | US07 | SHAP shows the top contributing factors for the selected customer; the explanation matches that customer and model output. | `test_explain.py` |
 | US08 | A documented rule returns an action based on risk/factors, or a safe fallback; suggestions are marked for human review. | `test_recommend.py` |
-| US09 | Pending → Contacted → Completed transitions are allowed as defined; status persists; invalid values are rejected. | `test_actions.py`, `test_api.py` |
-| US10 | Total customers and risk counts reflect stored records; filters update results; empty data does not break the dashboard. | `test_api.py::test_dashboard_*` |
+| US09 | Pending → Contacted → Completed transitions are allowed as defined; status persists; invalid values are rejected. | `test_actions.py`, `test_api_decisions.py` |
+| US10 | Total customers and risk counts reflect stored records; filters update results; empty data does not break the dashboard. | `test_api_decisions.py` |
 | US11 | Tests cover validation, risk, prediction, recommendation rules and key API flows; one documented command runs them. | `pytest` |
 | US12 | At least one real smell is refactored; duplicated or oversized logic is improved; tests still pass. | Before/after in `08_refactoring_and_retro.md` |
 | US13 | GitHub Actions runs tests and style checks; failures are visible and not silently ignored. | `.github/workflows/ci.yml` |
+| US14 | Only actions that apply to the customer are simulated; each option shows the estimated churn after the action; options are ranked by estimated reduction and the top one is the Next Best Action; a step-by-step plan adds actions until the customer is Low risk or nothing more helps; estimates are labelled as model what-if estimates and marked for human review; Low-risk customers get no action. | `test_next_best_action.py`, `test_api_next_best_action.py` |
 
 ## INVEST check (sample)
 
