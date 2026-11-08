@@ -67,6 +67,20 @@ def risky_row(customer_id="CS-RISKY"):
     )
 
 
+def at_risk_row(customer_id="CS-ATRISK"):
+    """A typical at-risk customer (~89% churn) with several fixable problems."""
+    return make_row(
+        customer_id,
+        contract_type="Month-to-month",
+        monthly_charges=85.0,
+        internet_service="Fiber optic",
+        tech_support="No",
+        payment_method="Electronic check",
+        support_tickets=3,
+        days_since_last_login=15,
+    )
+
+
 def loyal_row(customer_id="CS-LOYAL"):
     """A long-term, engaged customer (used for low-risk tests)."""
     return make_row(
