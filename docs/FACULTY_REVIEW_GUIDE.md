@@ -35,11 +35,13 @@ ChurnSense works like a **doctor's visit** for customers:
 
 ## 4. Demo script (about 7 minutes)
 
-**Before the review:** start the backend (`uvicorn app.main:app` in `backend/`) and the frontend (`npm run dev` in `frontend/`). Delete `backend/churnsense.db` for a clean start.
+**Before the review:** open **https://churnsense-one.vercel.app** about 2 minutes early. The free server sleeps when idle, and the page shows *"Waking up the server…"* until it's ready. It already contains the 250 demo customers.
+
+*Offline backup:* run it locally (`uvicorn app.main:app` in `backend/`, `npm run dev` in `frontend/`). Delete `backend/churnsense.db` for a clean start.
 
 | # | Do this | Say this | Syllabus link |
 |---|---|---|---|
-| 1 | Open the **Dashboard** (empty) | "With no data, the app shows a friendly message instead of crashing. That was an acceptance criterion." | Module 2 (acceptance criteria) |
+| 1 | Open the live link on the **Dashboard** | "This is hosted on Vercel (frontend) and Render (backend + PostgreSQL). Nobody had to start a server. Every push is tested by CI, and Render only deploys when all checks are green." | Module 5 (CI), US15 |
 | 2 | **Customers** → upload `sample_invalid_rows.csv` | "Bad data is rejected **row by row**: wrong number, unknown contract type, negative charge, duplicate ID, missing value. Nothing is saved." | US01, TDD |
 | 3 | Upload `sample_customers.csv` | "250 customers validated, and every one gets a churn probability in about a second." | US01, US04 |
 | 4 | Search and filter by **High** risk | "Highest risk is always listed first, so managers know who to call." | US02, US05 |

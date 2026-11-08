@@ -15,11 +15,11 @@ flowchart LR
     V -- HTTPS · JSON /api/* --> R
 ```
 
-| Part | Host | Plan | Address (example) |
+| Part | Host | Plan | Live address |
 |---|---|---|---|
-| Frontend (React build) | **Vercel** | Hobby (free) | `https://agile-pbl.vercel.app` |
-| Backend API (FastAPI) | **Render** web service | Free | `https://churnsense-api.onrender.com` |
-| Database | **Render PostgreSQL** | Free | internal to Render |
+| Frontend (React build) | **Vercel** (project `churnsense`) | Hobby (free) | https://churnsense-one.vercel.app |
+| Backend API (FastAPI) | **Render** web service `churnsense-api` | Free | https://churnsense-api-bz3x.onrender.com (docs: `/docs`) |
+| Database | **Render PostgreSQL** `churnsense-db` (PostgreSQL 18) | Free | internal to Render |
 
 Everything is described in code: [`render.yaml`](../render.yaml) (Render Blueprint) and the `VITE_API_URL` setting for Vercel.
 

@@ -38,7 +38,7 @@ SP = story points (relative estimate, Fibonacci scale). Priority uses **MoSCoW**
 | US12 | As a **Developer**, I want to refactor identified code smells so that the codebase remains maintainable. | Should | 3 | S4 | 🟡 1 of 5 smells fixed |
 | US13 | As a **Developer**, I want CI to run tests on pushes and pull requests so that regressions are caught early. | Must | 3 | S4 | ✅ CI green |
 | US14 🆕 | As a **Retention Manager**, I want the *Next Best Action* for a specific at-risk customer, ranked by how much each action is estimated to lower their churn, so that I choose the action most likely to keep that customer. | Should | 5 | S4 | ✅ Done |
-| US15 🆕 | As a **Faculty reviewer**, I want to open ChurnSense from a web link so that I can try it without installing anything or running servers. | Should | 3 | S4 | 🔨 Code ready, awaiting first deploy |
+| US15 🆕 | As a **Faculty reviewer**, I want to open ChurnSense from a web link so that I can try it without installing anything or running servers. | Should | 3 | S4 | ✅ Live: churnsense-one.vercel.app |
 | | **Total** | | **54** | | |
 
 > **Backlog change (2026-11-08):** the Product Owner added **US14** after reviewing Prototype v0.1. Scope grew from 46 to 51 SP. This is Agile *responding to change*: the new story is ordered by value and pulled into Sprint 4.

@@ -11,7 +11,7 @@
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=black)
 ![XGBoost](https://img.shields.io/badge/ML-XGBoost%20%2B%20SHAP-orange)
 ![Status](https://img.shields.io/badge/status-Prototype%20v0.1-blueviolet)
-![Hosting](https://img.shields.io/badge/hosted%20on-Vercel%20%2B%20Render-000000?logo=vercel&logoColor=white)
+[![Live demo](https://img.shields.io/badge/live%20demo-churnsense--one.vercel.app-000000?logo=vercel&logoColor=white)](https://churnsense-one.vercel.app)
 
 *Agile PBL project for **Fundamentals of Agile Software Development Lab (26B16CS314)**, JIIT Noida*
 
@@ -40,8 +40,8 @@ Companies lose money when customers quietly leave ("churn"). ChurnSense helps an
 
 | | Link |
 |---|---|
-| 🖥️ **App** (Vercel) | _link added after the first deploy_ |
-| ⚙️ **API docs** (Render) | _link added after the first deploy_ |
+| 🖥️ **App** (Vercel) | **https://churnsense-one.vercel.app** |
+| ⚙️ **API docs** (Render) | https://churnsense-api-bz3x.onrender.com/docs |
 
 No installation needed. The demo opens with 250 sample customers already loaded.
 The free server sleeps when idle, so the **first visit can take about a minute**; a banner explains this while it wakes up.
@@ -82,7 +82,7 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 | S1 Foundation | Customer data workflow | US01–US03 | 11 | ✅ in prototype |
 | S2 Prediction | Churn prediction MVP | US04–US06 | 10 | ✅ in prototype |
 | S3 Decision Support | Explainable decisions | US07–US10 | 14 | ✅ in prototype |
-| S4 Quality & Release | Tested, refactored, hosted release + Next Best Action | US11–US15 | 19 | 🟡 tests, CI, US14 and deploy setup done; 1 of 5 smells refactored, rest after feedback |
+| S4 Quality & Release | Tested, refactored, hosted release + Next Best Action | US11–US15 | 19 | 🟡 tests, CI, US14 and live deployment done; 1 of 5 smells refactored, rest after feedback |
 
 ---
 
