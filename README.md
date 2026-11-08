@@ -74,24 +74,96 @@ feat(S3): SHAP explanations, retention actions, status tracking, dashboard  [TDD
 
 ## 🏗️ Architecture
 
+<p align="center">
+  <img src="docs/images/architecture.svg" width="100%"
+       alt="ChurnSense architecture: users work in a React frontend that calls a FastAPI backend. The backend runs a six-step pipeline (validate, predict with XGBoost, classify risk, explain with SHAP, choose the Next Best Action, track follow-up) and stores results with SQLAlchemy. The model is trained offline, and GitHub Actions checks every push.">
+</p>
+
+### How to read the diagram
+
+| # | Layer | What happens there | Technology | Code |
+|---|---|---|---|---|
+| 1 | 👥 **Users** | An *Analyst* uploads and explores data; a *Retention Manager* acts on suggestions | Browser | — |
+| 2 | 🖥️ **Frontend** | Four screens: Dashboard, Customers, Customer detail, Model | React 18, TypeScript, Vite, Recharts | `frontend/src` |
+| 3 | ⚙️ **Backend API** | Receives every request and runs the **6-step service pipeline** for each customer | FastAPI, Python 3.11, Pydantic | `backend/app` |
+| 4 | 🗄️ **Data** | Stores customers, predictions and follow-up actions; holds the trained model files | SQLAlchemy 2 (SQLite → PostgreSQL) | `backend/app/models.py`, `backend/models/` |
+| 5 | 🧪 **Offline ML pipeline** | Generates the training data, trains XGBoost once, records honest holdout scores | pandas, scikit-learn, XGBoost, SHAP | `backend/ml/` |
+| 6 | ✅ **Quality & delivery** | Every push runs style checks, 129 tests and the frontend build | Pytest, flake8, GitHub Actions | `.github/workflows/ci.yml` |
+
+**The service pipeline in one line:** ① check the data → ② predict churn → ③ label the risk → ④ explain *why* → ⑤ pick the action that helps most → ⑥ track the follow-up.
+
+### What happens when an analyst uploads a CSV
+
 ```mermaid
-flowchart LR
-    U[👤 Analyst / Manager] --> FE[React + TypeScript<br/>dashboard]
-    FE -- REST /api --> BE[FastAPI backend]
-    BE --> V[Validation]
-    BE --> P[XGBoost model]
-    BE --> X[SHAP explainer]
-    BE --> R[Retention rules]
-    BE --> DB[(SQLAlchemy<br/>SQLite → PostgreSQL)]
+sequenceDiagram
+    autonumber
+    actor A as Analyst
+    participant UI as React UI
+    participant API as FastAPI
+    participant V as Validation
+    participant M as XGBoost model
+    participant X as SHAP
+    participant N as Next Best Action
+    participant DB as Database
+
+    A->>UI: Drop customers.csv
+    UI->>API: POST /api/customers/upload
+    API->>V: Check every row
+    alt Any row is invalid
+        V-->>API: Errors with row and column
+        API-->>UI: 400, nothing is saved
+        UI-->>A: Shows exactly what to fix
+    else All rows are valid
+        API->>M: Score all customers in one batch
+        M-->>API: Churn probability, then Low / Medium / High
+        API->>X: Explain each customer
+        X-->>API: Contribution of every field
+        API->>N: Find the best retention action
+        N->>M: Re-score changed copies (what-if)
+        N-->>API: Best action + plan
+        API->>DB: Save customers + Pending follow-ups
+        API-->>UI: 250 inserted, 0 updated
+    end
 ```
+
+### What happens when a manager opens a customer
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor R as Retention Manager
+    participant UI as React UI
+    participant API as FastAPI
+    participant X as SHAP
+    participant N as Next Best Action
+    participant M as XGBoost model
+    participant DB as Database
+
+    R->>UI: Open customer CS-10005
+    UI->>API: GET profile, explanation, next-best-action
+    API->>DB: Load the customer
+    API->>X: Why is this customer at risk?
+    X-->>API: Top reason is 51 days since last login
+    API->>N: Which action keeps this customer?
+    loop For each action that applies
+        N->>M: Re-score a changed copy
+    end
+    N-->>API: Re-engagement first, then a 3-step plan to Low risk
+    API-->>UI: Profile, reasons, best action, plan
+    R->>UI: Click "Mark as Contacted"
+    UI->>API: PATCH /api/customers/CS-10005/action
+    API->>DB: Pending to Contacted (skipping a step is rejected)
+```
+
+### Tech stack
 
 | Layer | Technology |
 |---|---|
 | Frontend | React 18, TypeScript, Vite, Recharts |
-| Backend / API | Python 3.11, FastAPI, SQLAlchemy 2 |
+| Backend / API | Python 3.11, FastAPI, Pydantic, SQLAlchemy 2 |
 | Database | SQLite for the prototype (switch to PostgreSQL with `DATABASE_URL`) |
 | ML / XAI | Pandas, NumPy, scikit-learn, XGBoost, SHAP |
-| Testing / Quality | Pytest (unit + API), flake8 |
+| Testing / Quality | Pytest (unit + API), flake8, TypeScript strict mode |
 | Version control / CI | Git, GitHub, GitHub Actions |
 
 ---
