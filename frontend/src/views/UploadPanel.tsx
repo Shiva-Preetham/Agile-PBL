@@ -64,7 +64,7 @@ export function UploadPanel({ onUploaded }: { onUploaded: () => void }) {
           {result.total_customers} customers in total, all scored.
         </div>
       )}
-      <ErrorBox messages={errors} />
+      <ErrorBox messages={errors} title="Please fix the following:" />
     </Card>
   );
 }

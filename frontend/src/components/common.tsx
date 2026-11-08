@@ -46,11 +46,11 @@ export function Card(props: { title?: string; subtitle?: string; actions?: React
   );
 }
 
-export function ErrorBox({ messages }: { messages: string[] }) {
+export function ErrorBox({ messages, title = "Something went wrong:" }: { messages: string[]; title?: string }) {
   if (!messages.length) return null;
   return (
     <div className="alert alert-error" role="alert">
-      <strong>Please fix the following:</strong>
+      <strong>{title}</strong>
       <ul>
         {messages.map((m) => (
           <li key={m}>{m}</li>

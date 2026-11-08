@@ -11,6 +11,9 @@ import type {
   UploadResult,
 } from "./types";
 
+/** Hosted build: the Render backend address. Local dev: empty, so Vite's proxy forwards /api. */
+export const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "");
+
 /** An API error with human-readable messages taken from the backend response. */
 export class ApiError extends Error {
   constructor(public status: number, public messages: string[]) {
@@ -31,9 +34,10 @@ function extractMessages(body: unknown, fallback: string): string[] {
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response;
   try {
-    response = await fetch(path, init);
+    response = await fetch(API_BASE + path, init);
   } catch {
-    throw new ApiError(0, ["Cannot reach the ChurnSense API. Is the backend running on port 8000?"]);
+    const where = API_BASE ? `at ${API_BASE}` : "on port 8000 (is the backend running?)";
+    throw new ApiError(0, [`Cannot reach the ChurnSense API ${where}.`]);
   }
   const body = await response.json().catch(() => null);
   if (!response.ok) {
@@ -54,6 +58,7 @@ const json = (method: string, data: unknown): RequestInit => ({
 });
 
 export const api = {
+  health: () => request<{ status: string; version: string }>("/api/health"),
   uploadCsv(file: File) {
     const form = new FormData();
     form.append("file", file);

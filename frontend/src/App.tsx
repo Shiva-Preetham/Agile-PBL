@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ServerStatus } from "./components/ServerStatus";
 import { CustomerDetail } from "./views/CustomerDetail";
 import { Customers } from "./views/Customers";
 import { Dashboard } from "./views/Dashboard";
@@ -45,6 +46,8 @@ export default function App() {
         </nav>
         <span className="version">Prototype v0.1</span>
       </header>
+
+      <ServerStatus />
 
       <main className="content">
         {customerId ? (

@@ -232,3 +232,8 @@ summary { cursor: pointer; color: var(--primary); font-weight: 600; }
 .options td { vertical-align: top; }
 .best-row td { background: var(--primary-soft); }
 .down { color: var(--low); font-weight: 600; }
+
+/* ---------- hosting: server wake-up banner (US15) ---------- */
+.banner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600; }
+.banner-info { background: var(--primary-soft); color: var(--primary); }
+.banner-error { background: #fef2f2; color: #991b1b; }
