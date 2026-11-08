@@ -52,13 +52,39 @@ export interface Explanation {
   note: string;
 }
 
-export interface Recommendation {
-  customer_id: string;
-  risk_category: Risk;
+export interface Suggestion {
   rule_id: string;
   action: string;
   reason: string;
   requires_human_review: boolean;
+}
+
+export interface ActionOption {
+  rule_id: string;
+  action: string;
+  cost: "Low" | "Medium" | "High";
+  change_text: string[];
+  new_probability: number;
+  new_risk: Risk;
+  reduction: number;
+  score_drop: number;
+}
+
+export interface PlanStep {
+  rule_id: string;
+  action: string;
+  probability: number;
+  risk: Risk;
+}
+
+export interface NextBestAction {
+  customer_id: string;
+  current_probability: number;
+  current_risk: Risk;
+  best: Suggestion;
+  options: ActionOption[];
+  plan: PlanStep[];
+  note: string;
 }
 
 export interface DashboardSummary {

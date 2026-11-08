@@ -5,8 +5,8 @@ import type {
   DashboardSummary,
   Explanation,
   ModelMetrics,
+  NextBestAction,
   Prediction,
-  Recommendation,
   RetentionAction,
   UploadResult,
 } from "./types";
@@ -64,8 +64,8 @@ export const api = {
   },
   getCustomer: (id: string) => request<CustomerProfile>(`/api/customers/${encodeURIComponent(id)}`),
   getExplanation: (id: string) => request<Explanation>(`/api/customers/${encodeURIComponent(id)}/explanation`),
-  getRecommendation: (id: string) =>
-    request<Recommendation>(`/api/customers/${encodeURIComponent(id)}/recommendation`),
+  getNextBestAction: (id: string) =>
+    request<NextBestAction>(`/api/customers/${encodeURIComponent(id)}/next-best-action`),
   updateStatus: (id: string, status: ActionStatus) =>
     request<RetentionAction>(`/api/customers/${encodeURIComponent(id)}/action`, json("PATCH", { status })),
   dashboard: (filters: { contract_type?: string; internet_service?: string }) =>

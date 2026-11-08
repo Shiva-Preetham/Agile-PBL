@@ -3,25 +3,23 @@ import { Bar, BarChart, CartesianGrid, Cell, ReferenceLine, ResponsiveContainer,
 import { api, ApiError } from "../api";
 import { Card, ErrorBox, RiskBadge, Spinner } from "../components/common";
 import { amount, percent, RISK_COLORS } from "../format";
-import type { ActionStatus, CustomerProfile, Explanation, Recommendation } from "../types";
+import type { ActionStatus, CustomerProfile, Explanation, NextBestAction } from "../types";
+import { NextBestActionCard, RetentionPlanCard } from "./NextBestAction";
 
-const STEPS: ActionStatus[] = ["Pending", "Contacted", "Completed"];
-const NEXT: Record<ActionStatus, ActionStatus | null> = { Pending: "Contacted", Contacted: "Completed", Completed: null };
-
-/** US03 profile · US04/05 probability & risk · US07 SHAP · US08 suggestion · US09 status. */
+/** US03 profile · US04/05 probability & risk · US07 SHAP · US09 status · US14 next best action. */
 export function CustomerDetail({ customerId, onBack }: { customerId: string; onBack: () => void }) {
   const [profile, setProfile] = useState<CustomerProfile | null>(null);
   const [explanation, setExplanation] = useState<Explanation | null>(null);
-  const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
+  const [nba, setNba] = useState<NextBestAction | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
   const load = useCallback(() => {
-    Promise.all([api.getCustomer(customerId), api.getExplanation(customerId), api.getRecommendation(customerId)])
-      .then(([p, e, r]) => {
+    Promise.all([api.getCustomer(customerId), api.getExplanation(customerId), api.getNextBestAction(customerId)])
+      .then(([p, e, n]) => {
         setProfile(p);
         setExplanation(e);
-        setRecommendation(r);
+        setNba(n);
       })
       .catch((e) => setErrors(e instanceof ApiError ? e.messages : ["Could not load customer."]));
   }, [customerId]);
@@ -42,7 +40,7 @@ export function CustomerDetail({ customerId, onBack }: { customerId: string; onB
 
   const back = <button className="btn btn-ghost" onClick={onBack}>← Back</button>;
   if (errors.length) return <div className="stack">{back}<ErrorBox messages={errors} /></div>;
-  if (!profile || !explanation || !recommendation) return <Spinner />;
+  if (!profile || !explanation || !nba) return <Spinner />;
 
   const risk = profile.risk_category;
   // Strongest factor first, so it appears at the top of the chart.
@@ -117,35 +115,10 @@ export function CustomerDetail({ customerId, onBack }: { customerId: string; onB
           <p className="muted small">{explanation.note}</p>
         </Card>
 
-        <Card title="Suggested next step">
-          <p className="action-text">{recommendation.action}</p>
-          <p className="muted small">{recommendation.reason}</p>
-          <p className="small">
-            <span className="tag">Rule: {recommendation.rule_id}</span>{" "}
-            {recommendation.requires_human_review && <span className="tag tag-warn">👤 Needs human review</span>}
-          </p>
-
-          <h4>Follow-up status</h4>
-          {profile.action ? (
-            <>
-              <ol className="stepper">
-                {STEPS.map((s) => (
-                  <li key={s} className={STEPS.indexOf(s) <= STEPS.indexOf(profile.action!.status) ? "done" : ""}>{s}</li>
-                ))}
-              </ol>
-              {NEXT[profile.action.status] ? (
-                <button className="btn btn-primary full" disabled={saving} onClick={() => advance(NEXT[profile.action!.status]!)}>
-                  Mark as {NEXT[profile.action.status]}
-                </button>
-              ) : (
-                <p className="alert alert-success">✅ Follow-up completed</p>
-              )}
-            </>
-          ) : (
-            <p className="muted small">Low-risk customers have no tracked follow-up action.</p>
-          )}
-        </Card>
+        <NextBestActionCard nba={nba} followUp={profile.action} saving={saving} onAdvance={advance} />
       </div>
+
+      <RetentionPlanCard nba={nba} />
     </div>
   );
 }
