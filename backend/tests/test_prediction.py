@@ -9,11 +9,7 @@ import pytest
 from app.services.prediction import InvalidFeaturesError, get_predictor
 from app.services.risk import HIGH_THRESHOLD, MEDIUM_THRESHOLD
 from app.services.validation import validate_dataframe
-from tests.conftest import loyal_row, make_row, risky_row
-
-
-def features(row):
-    return {k: v for k, v in row.items() if k != "customer_id"}
+from tests.conftest import features, loyal_row, make_row, risky_row
 
 
 def test_probability_is_between_0_and_1():

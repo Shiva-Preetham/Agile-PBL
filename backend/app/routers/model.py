@@ -6,6 +6,7 @@ from fastapi import APIRouter, Body, HTTPException
 
 from app.config import METRICS_PATH
 from app.schemas import PredictionResult
+from app.services.fields import FEATURE_FIELDS, CategoryField, NumericField
 from app.services.prediction import InvalidFeaturesError, get_predictor
 from app.services.risk import HIGH_THRESHOLD, MEDIUM_THRESHOLD, classify_risk
 
@@ -32,6 +33,28 @@ def predict(features: dict[str, Any] = Body(..., examples=[EXAMPLE_CUSTOMER])):
     except InvalidFeaturesError as error:
         raise HTTPException(422, detail={"errors": error.errors})
     return PredictionResult(churn_probability=probability, risk_category=classify_risk(probability))
+
+
+@router.get("/model/schema")
+def model_schema():
+    """Single source of truth for the UI: customer fields and risk thresholds."""
+    return {
+        "fields": [_describe(spec) for spec in FEATURE_FIELDS],
+        "risk_thresholds": {"medium": MEDIUM_THRESHOLD, "high": HIGH_THRESHOLD},
+    }
+
+
+def _describe(spec: NumericField | CategoryField) -> dict:
+    if isinstance(spec, CategoryField):
+        return {"name": spec.name, "label": spec.label, "kind": "category", "options": list(spec.allowed)}
+    return {
+        "name": spec.name,
+        "label": spec.label,
+        "kind": "number",
+        "minimum": spec.minimum,
+        "maximum": spec.maximum,
+        "whole_number": spec.whole_number,
+    }
 
 
 @router.get("/model/metrics")

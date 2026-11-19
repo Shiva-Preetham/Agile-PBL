@@ -5,6 +5,7 @@ import { Card, ErrorBox, RiskBadge, Spinner } from "../components/common";
 import { amount, percent, RISK_COLORS } from "../format";
 import type { ActionStatus, CustomerProfile, Explanation, NextBestAction } from "../types";
 import { NextBestActionCard, RetentionPlanCard } from "./NextBestAction";
+import { thresholdLabels, useSchema } from "../useSchema";
 
 /** US03 profile · US04/05 probability & risk · US07 SHAP · US09 status · US14 next best action. */
 export function CustomerDetail({ customerId, onBack }: { customerId: string; onBack: () => void }) {
@@ -13,6 +14,7 @@ export function CustomerDetail({ customerId, onBack }: { customerId: string; onB
   const [nba, setNba] = useState<NextBestAction | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
+  const labels = thresholdLabels(useSchema());
 
   const load = useCallback(() => {
     Promise.all([api.getCustomer(customerId), api.getExplanation(customerId), api.getNextBestAction(customerId)])
@@ -78,7 +80,7 @@ export function CustomerDetail({ customerId, onBack }: { customerId: string; onB
             <span>{percent(profile.churn_probability)}</span>
           </div>
           <p className="center muted">
-            <strong>{risk}</strong> risk · thresholds 40% / 70%
+            <strong>{risk}</strong> risk · thresholds {labels.pair}
           </p>
         </Card>
 

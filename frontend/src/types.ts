@@ -123,6 +123,21 @@ export interface ModelMetrics {
   trained_at: string;
 }
 
+export interface FieldSpec {
+  name: string;
+  label: string;
+  kind: "number" | "category";
+  options?: string[];
+  minimum?: number;
+  maximum?: number;
+  whole_number?: boolean;
+}
+
+export interface ModelSchema {
+  fields: FieldSpec[];
+  risk_thresholds: { medium: number; high: number };
+}
+
 export interface UploadResult {
   inserted: number;
   updated: number;

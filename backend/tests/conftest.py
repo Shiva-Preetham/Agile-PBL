@@ -100,6 +100,11 @@ def loyal_row(customer_id="CS-LOYAL"):
     )
 
 
+def features(row):
+    """A customer row without its ID: the input the model and /api/predict expect."""
+    return {k: v for k, v in row.items() if k != "customer_id"}
+
+
 def to_csv_bytes(rows, columns=None):
     columns = columns or COLUMNS
     buffer = io.StringIO()

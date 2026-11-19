@@ -4,12 +4,14 @@ import { api, ApiError } from "../api";
 import { Card, EmptyState, ErrorBox, RiskBadge, Spinner, StatCard } from "../components/common";
 import { CONTRACT_TYPES, INTERNET_SERVICES, percent, RISK_COLORS, RISKS } from "../format";
 import type { DashboardSummary } from "../types";
+import { thresholdLabels, useSchema } from "../useSchema";
 
 /** US10: portfolio-level churn risk summary. */
 export function Dashboard(props: { onOpenCustomer: (id: string) => void; onGoToUpload: () => void }) {
   const [contract, setContract] = useState("");
   const [internet, setInternet] = useState("");
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
+  const labels = thresholdLabels(useSchema());
   const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
@@ -68,9 +70,9 @@ export function Dashboard(props: { onOpenCustomer: (id: string) => void; onGoToU
 
       <div className="stats">
         <StatCard label="Customers" value={summary.total_customers} hint={filtersActive ? "matching filters" : "in portfolio"} />
-        <StatCard label="High risk" value={summary.risk_counts.High} tone="High" hint="probability ≥ 70%" />
-        <StatCard label="Medium risk" value={summary.risk_counts.Medium} tone="Medium" hint="40% – 70%" />
-        <StatCard label="Low risk" value={summary.risk_counts.Low} tone="Low" hint="below 40%" />
+        <StatCard label="High risk" value={summary.risk_counts.High} tone="High" hint={labels.high} />
+        <StatCard label="Medium risk" value={summary.risk_counts.Medium} tone="Medium" hint={labels.medium} />
+        <StatCard label="Low risk" value={summary.risk_counts.Low} tone="Low" hint={labels.low} />
         <StatCard label="Avg. churn probability" value={percent(summary.average_churn_probability)} />
       </div>
 

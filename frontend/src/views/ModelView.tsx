@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api, ApiError } from "../api";
 import { Card, ErrorBox, RiskBadge, Spinner, StatCard } from "../components/common";
-import { CONTRACT_TYPES, INTERNET_SERVICES, percent, RISK_COLORS } from "../format";
+import { percent, RISK_COLORS } from "../format";
 import type { ModelMetrics, Prediction, ScoreSet } from "../types";
+import { useSchema } from "../useSchema";
 
 const METRIC_INFO: Array<[keyof ScoreSet, string, string]> = [
   ["roc_auc", "ROC-AUC", "How well the model ranks churners above stayers (0.5 = guessing, 1 = perfect)"],
@@ -14,18 +15,6 @@ const METRIC_INFO: Array<[keyof ScoreSet, string, string]> = [
 ];
 
 type Form = Record<string, string | number>;
-const FIELDS: Array<{ name: string; label: string; options?: string[]; min?: number; max?: number; step?: number }> = [
-  { name: "contract_type", label: "Contract type", options: CONTRACT_TYPES },
-  { name: "tenure_months", label: "Tenure (months)", min: 0, max: 120 },
-  { name: "monthly_charges", label: "Monthly charges", min: 0, max: 1000, step: 0.5 },
-  { name: "total_charges", label: "Total charges", min: 0, max: 200000, step: 1 },
-  { name: "internet_service", label: "Internet service", options: INTERNET_SERVICES },
-  { name: "tech_support", label: "Tech support", options: ["Yes", "No"] },
-  { name: "payment_method", label: "Payment method", options: ["Electronic check", "Mailed check", "Bank transfer", "Credit card"] },
-  { name: "support_tickets", label: "Support tickets", min: 0, max: 100 },
-  { name: "monthly_usage_gb", label: "Monthly usage (GB)", min: 0, max: 10000, step: 0.1 },
-  { name: "days_since_last_login", label: "Days since last login", min: 0, max: 3650 },
-];
 const START: Form = {
   contract_type: "Month-to-month", tenure_months: 3, monthly_charges: 95.5, total_charges: 286.5,
   internet_service: "Fiber optic", tech_support: "No", payment_method: "Electronic check",
@@ -98,6 +87,7 @@ export function ModelView() {
 }
 
 function WhatIf({ thresholds }: { thresholds: ModelMetrics["risk_thresholds"] }) {
+  const schema = useSchema();
   const [form, setForm] = useState<Form>(START);
   const [result, setResult] = useState<Prediction | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
@@ -119,16 +109,16 @@ function WhatIf({ thresholds }: { thresholds: ModelMetrics["risk_thresholds"] })
     <Card title="What-if predictor" subtitle="Change a customer's details and watch the churn probability update live">
       <div className="whatif">
         <div className="form-grid">
-          {FIELDS.map((f) => (
+          {(schema?.fields ?? []).map((f) => (
             <label key={f.name}>
               {f.label}
-              {f.options ? (
+              {f.kind === "category" && f.options ? (
                 <select value={form[f.name]} onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}>
                   {f.options.map((o) => <option key={o}>{o}</option>)}
                 </select>
               ) : (
                 <input
-                  type="number" min={f.min} max={f.max} step={f.step ?? 1} value={form[f.name]}
+                  type="number" min={f.minimum} max={f.maximum} step={f.whole_number ? 1 : 0.1} value={form[f.name]}
                   onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
                 />
               )}

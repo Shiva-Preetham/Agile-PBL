@@ -1,10 +1,6 @@
 """US04-US06 through the REST API."""
 from app.services.risk import classify_risk
-from tests.conftest import loyal_row, make_row, risky_row, upload
-
-
-def features(row):
-    return {k: v for k, v in row.items() if k != "customer_id"}
+from tests.conftest import features, loyal_row, make_row, risky_row, upload
 
 
 # ---------- US04 + US05: probability and risk shown together ----------

@@ -5,6 +5,7 @@ import type {
   DashboardSummary,
   Explanation,
   ModelMetrics,
+  ModelSchema,
   NextBestAction,
   Prediction,
   RetentionAction,
@@ -76,5 +77,6 @@ export const api = {
   dashboard: (filters: { contract_type?: string; internet_service?: string }) =>
     request<DashboardSummary>("/api/dashboard/summary" + query(filters)),
   metrics: () => request<ModelMetrics>("/api/model/metrics"),
+  schema: () => request<ModelSchema>("/api/model/schema"),
   predict: (features: Record<string, string | number>) => request<Prediction>("/api/predict", json("POST", features)),
 };
