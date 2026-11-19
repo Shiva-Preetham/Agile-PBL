@@ -1,0 +1,11 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Pending : scored Medium or High
+    Pending --> Contacted : Mark as Contacted
+    Contacted --> Completed : Mark as Completed
+    Completed --> [*]
+    note right of Pending
+        Skipping a step or going back
+        is rejected (HTTP 409).
+        Unknown status gives HTTP 422.
+    end note

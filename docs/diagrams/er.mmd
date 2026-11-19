@@ -1,0 +1,29 @@
+erDiagram
+    direction LR
+    CUSTOMERS ||--o| RETENTION_ACTIONS : "has follow-up"
+    CUSTOMERS {
+        int id PK
+        string customer_id UK
+        int tenure_months
+        string contract_type
+        float monthly_charges
+        float total_charges
+        string internet_service
+        string tech_support
+        string payment_method
+        int support_tickets
+        float monthly_usage_gb
+        int days_since_last_login
+        float churn_probability
+        string risk_category
+        datetime created_at
+        datetime updated_at
+    }
+    RETENTION_ACTIONS {
+        int id PK
+        int customer_pk FK
+        string rule_id
+        string action
+        string status
+        datetime updated_at
+    }

@@ -1,0 +1,81 @@
+classDiagram
+    direction LR
+    class NumericField {
+        +name: str
+        +label: str
+        +minimum: float
+        +maximum: float
+        +whole_number: bool
+    }
+    class CategoryField {
+        +name: str
+        +label: str
+        +allowed: tuple
+    }
+    class ValidationResult {
+        +data: DataFrame
+        +errors: list
+        +is_valid() bool
+    }
+    class ChurnPredictor {
+        -model: XGBClassifier
+        +predict_proba(data) ndarray
+        +predict_one(features) float
+    }
+    class Explanation {
+        +probability: float
+        +base_value: float
+        +factors: list
+        +top(n) list
+        +risk_drivers(n) list
+    }
+    class Factor {
+        +feature: str
+        +label: str
+        +value: object
+        +contribution: float
+        +effect() str
+    }
+    class Rule {
+        +rule_id: str
+        +triggers: tuple
+        +action: str
+        +description: str
+    }
+    class Recommendation {
+        +rule_id: str
+        +action: str
+        +reason: str
+        +requires_human_review: bool
+    }
+    class Effect {
+        +cost: str
+        +simulate(customer) dict
+    }
+    class NextBestAction {
+        +current_probability: float
+        +best: Recommendation
+        +options: list
+        +plan: list
+    }
+    class ActionOption {
+        +rule_id: str
+        +new_probability: float
+        +score_drop: float
+        +reduction() float
+        +new_risk() str
+    }
+    class PlanStep {
+        +rule_id: str
+        +probability: float
+        +risk() str
+    }
+    ValidationResult ..> NumericField : checks with
+    ValidationResult ..> CategoryField : checks with
+    ChurnPredictor ..> ValidationResult : uses valid data
+    Explanation "1" *-- "10" Factor
+    Rule ..> Recommendation : produces
+    Effect ..> Rule : what-if effect of
+    NextBestAction "1" *-- "*" ActionOption
+    NextBestAction "1" *-- "*" PlanStep
+    NextBestAction --> Recommendation : best

@@ -1,0 +1,10 @@
+flowchart TB
+    PB[(Product Backlog)] --> SP[Sprint Planning]
+    SP --> SB[(Sprint Backlog)]
+    SB --> D[Daily work + Daily Stand-up]
+    D --> T[TDD: test first, then code]
+    T --> INC[Working Increment]
+    INC --> SR[Sprint Review with faculty]
+    SR --> RE[Sprint Retrospective]
+    SR -. feedback .-> PB
+    RE -. improvements .-> SP

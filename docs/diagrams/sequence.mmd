@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor A as Analyst
+    participant UI as React UI
+    participant API as FastAPI
+    participant V as Validation
+    participant M as XGBoost model
+    participant X as SHAP
+    participant N as Next Best Action
+    participant DB as Database
+    A->>UI: Choose customers.csv
+    UI->>API: POST /api/customers/upload
+    API->>V: Check every row
+    alt Any row invalid
+        V-->>API: Errors (row + column)
+        API-->>UI: 400, nothing saved
+    else All rows valid
+        API->>M: Score all customers
+        M-->>API: Probability, then risk level
+        API->>X: Explain each customer
+        X-->>API: Contribution of every field
+        API->>N: Find best retention action
+        N->>M: Re-score changed copies
+        N-->>API: Best action + plan
+        API->>DB: Save customers + follow-ups
+        API-->>UI: 250 inserted, 0 updated
+    end

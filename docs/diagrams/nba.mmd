@@ -1,0 +1,15 @@
+flowchart TD
+    A([Customer with churn probability p]) --> B{Risk is Low?}
+    B -- Yes --> L[Suggest: no immediate action]
+    B -- No --> C[Find actions that apply<br/>e.g. contract upgrade, discount]
+    C --> D[For each action: change a copy<br/>of the customer and re-score it]
+    D --> E["Score drop = logit(p) - logit(p after)"]
+    E --> F{Any drop of at least 0.10?}
+    F -- No --> G[Fallback rule from SHAP driver<br/>or personal check-in call]
+    F -- Yes --> H[Rank by drop, cost as tie-break<br/>Top one = Next Best Action]
+    H --> I[Retention plan: apply the best action,<br/>search again on the changed copy]
+    I --> J{Low risk reached, or<br/>nothing helps any more?}
+    J -- No --> I
+    J -- Yes --> K([Show action, options and plan<br/>marked: needs human review])
+    L --> K
+    G --> K

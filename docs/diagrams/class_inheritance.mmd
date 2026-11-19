@@ -1,0 +1,42 @@
+classDiagram
+    direction TB
+    class DeclarativeBase {
+        <<SQLAlchemy>>
+    }
+    class Customer {
+        +customer_id: str
+        +ten feature columns
+        +churn_probability: float
+        +risk_category: str
+    }
+    class RetentionAction {
+        +rule_id: str
+        +action: str
+        +status: str
+    }
+    DeclarativeBase <|-- Base
+    Base <|-- Customer
+    Base <|-- RetentionAction
+    Customer "1" --> "0..1" RetentionAction : action
+    class BaseModel {
+        <<Pydantic>>
+    }
+    BaseModel <|-- CustomerSummary
+    CustomerSummary <|-- CustomerProfile
+    class ValueError {
+        <<Python built-in>>
+    }
+    class InvalidFeaturesError {
+        +errors: list
+    }
+    ValueError <|-- InvalidFeaturesError
+    ValueError <|-- InvalidStatusError
+    ValueError <|-- InvalidTransitionError
+    class Error {
+        <<TypeScript built-in>>
+    }
+    class ApiError {
+        +status: number
+        +messages: string[]
+    }
+    Error <|-- ApiError

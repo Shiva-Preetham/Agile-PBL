@@ -1,0 +1,14 @@
+flowchart TD
+    S([Analyst uploads CSV]) --> V{Every row valid?}
+    V -- No --> E[Return row-level errors<br/>nothing is saved]
+    E --> X([End])
+    V -- Yes --> P[Predict churn probability<br/>XGBoost, whole batch]
+    P --> R[Classify risk<br/>Low / Medium / High]
+    R --> ST[(Save or update customers)]
+    ST --> EX[Explain each customer<br/>SHAP contributions]
+    EX --> NBA[Next Best Action<br/>what-if re-scoring + plan]
+    NBA --> Q{Medium or High risk?}
+    Q -- Yes --> PA[(Create Pending follow-up<br/>or refresh suggestion)]
+    Q -- No --> SK[No follow-up needed]
+    PA --> D([Dashboard updated])
+    SK --> D

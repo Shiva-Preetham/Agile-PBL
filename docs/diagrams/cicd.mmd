@@ -1,0 +1,12 @@
+flowchart LR
+    DEV[git push /<br/>pull request] --> GA[GitHub Actions]
+    GA --> J1[flake8 +<br/>pytest on SQLite]
+    GA --> J2[pytest on<br/>PostgreSQL 16]
+    GA --> J3[TypeScript check<br/>+ Vite build]
+    J1 --> OK{All green?}
+    J2 --> OK
+    J3 --> OK
+    OK -- yes --> R[Render deploys<br/>backend API]
+    OK -- no --> STOP[Deploy blocked:<br/>fix first]
+    DEV --> V[Vercel builds<br/>frontend]
+    R --- DB[(Render<br/>PostgreSQL)]

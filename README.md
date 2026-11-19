@@ -47,6 +47,11 @@ No installation needed. The demo opens with 250 sample customers already loaded.
 The free server sleeps when idle, so the **first visit can take about a minute**; a banner explains this while it wakes up.
 How it is deployed (and how to redeploy): [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
+## 📄 Project report
+
+The full lab report (JIIT format: cover page, 4 chapters, 25 figures including UML diagrams, 17 tables, references and appendix):
+**[PDF](docs/report/ChurnSense_Project_Report.pdf)** · [Word](docs/report/ChurnSense_Project_Report.docx) · UML/flowchart sources in [docs/diagrams/](docs/diagrams/).
+
 ---
 
 ## 🧭 Agile at the heart of the project
