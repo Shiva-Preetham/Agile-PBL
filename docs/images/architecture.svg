@@ -289,7 +289,7 @@
   <text class="s" x="935" y="845" text-anchor="middle" style="fill:var(--text)">flake8 · style rules</text>
   <line class="flow" x1="935" y1="859" x2="935" y2="870" marker-end="url(#a)"/>
   <rect class="card" x="808" y="872" width="254" height="36" rx="18"/>
-  <text class="s" x="935" y="895" text-anchor="middle" style="fill:var(--text)">pytest · 142 tests · SQLite + Postgres</text>
+  <text class="s" x="935" y="895" text-anchor="middle" style="fill:var(--text)">pytest · 146 tests · SQLite + Postgres</text>
   <line class="flow" x1="935" y1="909" x2="935" y2="920" marker-end="url(#a)"/>
   <rect class="card" x="808" y="922" width="254" height="36" rx="18"/>
   <text class="s" x="935" y="945" text-anchor="middle" style="fill:var(--text)">tsc + vite build · frontend</text>

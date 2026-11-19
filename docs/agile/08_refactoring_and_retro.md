@@ -10,10 +10,10 @@ We reviewed our own Prototype v0.1 code and found these real smells:
 | # | Smell | Where | Refactoring technique | Status |
 |---|---|---|---|---|
 | 1 | **Duplicate Code**: look up a customer and run SHAP, repeated in two endpoints | `backend/app/routers/customers.py` | Extract Method | ✅ Done (example below) |
-| 2 | **Duplicate Code** across layers: the 10 customer fields and their ranges are listed in the backend *and* again in the what-if form | `frontend/src/views/ModelView.tsx` vs `backend/app/services/fields.py` | Add a `GET /api/model/fields` endpoint; build the form from it | 📋 Sprint 4 |
-| 3 | **Magic numbers**: risk thresholds "40% / 70%" hard-coded in UI text | `Dashboard.tsx`, `CustomerDetail.tsx` | Replace with values from `/api/model/metrics` (`risk_thresholds`) | 📋 Sprint 4 |
-| 4 | **Long Method**: `summarize()` builds six different statistics in one function | `backend/app/services/dashboard.py` | Extract Method (`_count_by_risk`, `_count_actions`, `_risk_by_contract`) | 📋 Sprint 4 |
-| 5 | **Duplicate Code** in tests: the `features()` helper is defined in two test files | `test_prediction.py`, `test_api_prediction.py` | Move to `conftest.py` | 📋 Sprint 4 |
+| 2 | **Duplicate Code** across layers: the 10 customer fields and their ranges are listed in the backend *and* again in the what-if form | `frontend/src/views/ModelView.tsx` vs `backend/app/services/fields.py` | New `GET /api/model/schema` endpoint; the form is generated from it | ✅ Done |
+| 3 | **Magic numbers**: risk thresholds "40% / 70%" hard-coded in UI text | `Dashboard.tsx`, `CustomerDetail.tsx` | Thresholds read from `/api/model/schema` via `useSchema()` | ✅ Done |
+| 4 | **Long Method**: `summarize()` builds six different statistics in one function | `backend/app/services/dashboard.py` | Extract Method (`_risk_counts`, `_action_status_counts`, `_risk_by_contract`, …) | ✅ Done |
+| 5 | **Duplicate Code** in tests: the `features()` helper is defined in two test files | `test_prediction.py`, `test_api_prediction.py` | Move Function to `conftest.py` | ✅ Done |
 
 ## 2. Before / after example (smell #1)
 
